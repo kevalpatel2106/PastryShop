@@ -25,7 +25,9 @@ import java.util.concurrent.TimeUnit
 class Network(private val baseUrl: String, enableLog: Boolean) {
 
     /**
-     * Gson instance with custom gson deserializers.
+     * [Gson] instance to parse json responses.
+     *
+     * @see gsonConverterFactory
      */
     private val sGson: Gson = GsonBuilder()
             .setLenient()
@@ -42,6 +44,12 @@ class Network(private val baseUrl: String, enableLog: Boolean) {
      * [RxJava2CallAdapterFactory] for converting responses to Rx observables.
      */
     private val rxCallAdapterFactory = RxJava2CallAdapterFactory.create()
+
+    /**
+     * [GsonConverterFactory] to parse json responses using [sGson].
+     *
+     * @see sGson
+     */
     private val gsonConverterFactory = GsonConverterFactory.create(sGson)
 
     init {

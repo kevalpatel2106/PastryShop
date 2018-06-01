@@ -9,4 +9,5 @@
 <resources>
 
     <string name="application_name" translatable="false">Pastry Shop</string>
+    <string name="transition_name_home_card_view">card</string>
 </resources>

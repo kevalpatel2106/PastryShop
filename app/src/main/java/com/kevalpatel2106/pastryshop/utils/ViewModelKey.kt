@@ -6,28 +6,17 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.kevalpatel2106.pastryshop.repository.network
+package com.kevalpatel2106.pastryshop.utils
+
+import android.arch.lifecycle.ViewModel
+import dagger.MapKey
+import kotlin.reflect.KClass
 
 /**
  * Created by Keval on 01/06/18.
  *
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
-
-object NetworkConfig {
-
-    /**
-     * Request read timeout in minutes.
-     */
-    internal const val READ_TIMEOUT = 1L
-
-    /**
-     * Request write timeout in minutes.
-     */
-    internal const val WRITE_TIMEOUT = 1L
-
-    /**
-     * Network connection timeout in minutes.
-     */
-    internal const val CONNECTION_TIMEOUT = 1L
-}
+@Target(AnnotationTarget.FUNCTION, AnnotationTarget.PROPERTY_GETTER, AnnotationTarget.PROPERTY_SETTER)
+@MapKey
+annotation class ViewModelKey(val value: KClass<out ViewModel>)

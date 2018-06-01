@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.kevalpatel2106.pastryshop.R
 import com.kevalpatel2106.pastryshop.bin.HomeCards
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_dashboard_card.view.*
 
 /**
@@ -33,10 +34,15 @@ class HomeCardsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
     }
 
-    fun bind(card: HomeCards, imageHeight : Int){
-        itemView.title.text = card.title
-        itemView.descr.text = card.description
+    fun bind(card: HomeCards, imageHeight: Int) {
+        itemView.card_title_tv.text = card.title
+        itemView.card_description_tv.text = card.description
 
-        itemView.image.layoutParams.height = imageHeight
+        itemView.card_iv.layoutParams.height = imageHeight
+        Picasso.get().load(card.image)
+                .resizeDimen(R.dimen.home_cards_image_max_height, R.dimen.home_cards_image_max_height)
+                .centerCrop()
+                .placeholder(R.drawable.ic_placeholder)
+                .into(itemView.card_iv)
     }
 }

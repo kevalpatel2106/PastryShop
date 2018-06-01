@@ -21,8 +21,6 @@
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleGravity="center|left"
-            app:expandedTitleMarginEnd="64dp"
-            app:expandedTitleMarginStart="64dp"
             app:expandedTitleTextAppearance="@style/Base.TextAppearance.AppCompat.Display1"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:scrimVisibleHeightTrigger="1dp"
@@ -38,13 +36,21 @@
                 android:src="@drawable/home_background"
                 app:layout_collapseMode="parallax" />
 
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                android:scaleType="centerCrop"
+                android:src="#44111111"
+                app:layout_collapseMode="parallax" />
+
             <LinearLayout
                 android:id="@+id/header_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="@dimen/md_activity_horizontal_margin"
-                android:layout_marginStart="@dimen/spacing_huge"
+                android:layout_marginStart="@dimen/md_activity_horizontal_margin"
                 android:orientation="vertical"
                 app:layout_collapseMode="parallax">
 
@@ -53,22 +59,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:letterSpacing="0.2"
+                    android:letterSpacing="0.1"
                     android:text="@string/shop_name"
                     android:textAllCaps="true"
                     android:textAppearance="@style/LargeText.Primary"
                     android:textColor="@android:color/white"
-                    android:textSize="40sp" />
+                    android:textSize="40sp"
+                    app:fontFamily="@font/noto_sans" />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/shop_subtitle_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:letterSpacing="0.1"
                     android:text="@string/shop_subtitle"
                     android:textAllCaps="true"
                     android:textAppearance="@style/MediumText.Secondary"
                     android:textColor="@android:color/white"
+                    app:fontFamily="@font/noto_sans"
                     app:layout_collapseMode="parallax" />
             </LinearLayout>
 

@@ -10,12 +10,10 @@ package com.kevalpatel2106.pastryshop.di
 
 import android.app.Application
 import android.content.Context
-import com.kevalpatel2106.pastryshop.BuildConfig
 import com.kevalpatel2106.pastryshop.MyApplication
 import com.kevalpatel2106.pastryshop.utils.RxSchedulers
 import dagger.Module
 import dagger.Provides
-import javax.inject.Named
 import javax.inject.Singleton
 
 /**
@@ -24,13 +22,13 @@ import javax.inject.Singleton
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
 @Module
-class AppDiModule(private val application: Application) {
+class BaseDiModule(private val application: Application) {
 
     companion object {
         const val BASE_URL = "base_url"
         const val ENABLE_LOG = "enable_log"
 
-        fun get(application: Application) = AppDiModule(application)
+        fun get(application: Application) = BaseDiModule(application)
     }
 
     @Singleton

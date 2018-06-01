@@ -19,7 +19,7 @@ import javax.inject.Inject
  *
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
-internal class RepositoryImpl @Inject constructor(private val network: Network) : Repository {
+internal class RepositoryImpl constructor(private val network: Network) : Repository {
 
     override fun getData(): Observable<ArrayList<HomeCards>> {
         return network.getRetrofitClient()

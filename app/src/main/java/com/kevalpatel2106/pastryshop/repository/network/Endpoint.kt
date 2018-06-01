@@ -8,8 +8,6 @@
 
 package com.kevalpatel2106.pastryshop.repository.network
 
-import com.kevalpatel2106.pastryshop.bin.HomeCards
-import com.kevalpatel2106.pastryshop.repository.GetDataResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
 
@@ -20,6 +18,6 @@ import retrofit2.http.GET
  */
 interface Endpoint {
 
-    @GET
+    @GET("app_data.json")
     fun getData(): Observable<GetDataResponse>
 }

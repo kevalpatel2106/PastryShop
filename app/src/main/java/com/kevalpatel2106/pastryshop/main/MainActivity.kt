@@ -18,6 +18,7 @@ import android.view.Gravity
 import android.view.MenuItem
 import com.kevalpatel2106.pastryshop.R
 import com.kevalpatel2106.pastryshop.home.HomeFragment
+import com.kevalpatel2106.pastryshop.utils.prepareLaunchIntent
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_drawer.*
 
@@ -57,7 +58,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      */
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.menu_drawer_home -> {  //User clicked on Home
+            R.id.menu_drawer_home -> {  //User clicked on HomeViewModel
 
                 if (supportFragmentManager.findFragmentById(R.id.container) !is HomeFragment) {
                     supportFragmentManager.beginTransaction()
@@ -109,11 +110,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
          * start [MainActivity] in a new task.
          */
         fun launch(context: Context, isNewTask: Boolean = false) {
-            context.startActivity(Intent(context, MainActivity::class.java).apply {
-                if (isNewTask) {
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-                }
-            })
+            context.startActivity(context.prepareLaunchIntent(MainActivity::class.java, isNewTask))
         }
     }
 }

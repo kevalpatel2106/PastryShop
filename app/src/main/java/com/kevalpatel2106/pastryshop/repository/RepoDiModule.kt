@@ -6,16 +6,15 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.kevalpatel2106.pastryshop.repository.di
+package com.kevalpatel2106.pastryshop.repository
 
 import com.kevalpatel2106.pastryshop.BuildConfig
-import com.kevalpatel2106.pastryshop.di.AppDiModule
+import com.kevalpatel2106.pastryshop.di.BaseDiModule
 import com.kevalpatel2106.pastryshop.repository.network.Network
 import com.kevalpatel2106.pastryshop.utils.ApplicationScope
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
-import javax.inject.Singleton
 
 /**
  * Created by Keval on 01/06/18.
@@ -32,14 +31,14 @@ class RepoDiModule {
 
     @Provides
     @ApplicationScope
-    @Named(AppDiModule.BASE_URL)
+    @Named(BaseDiModule.BASE_URL)
     internal fun provideBaseUrl(): String {
-        return "https://photoloc-qa.appspot.com" //TODO Switch for production
+        return "https://rawgit.com/kevalpatel2106/PastryShop/master/server/"
     }
 
     @Provides
     @ApplicationScope
-    @Named(AppDiModule.ENABLE_LOG)
+    @Named(BaseDiModule.ENABLE_LOG)
     internal fun provideIsEnableLogging(): Boolean {
         return BuildConfig.BUILD_TYPE.contains("debug", true)
     }
@@ -51,5 +50,9 @@ class RepoDiModule {
         return Network(baseUrl, enableLogging)
     }
 
-
+    @Provides
+    @ApplicationScope
+    fun provideRepository(network: Network): Repository {
+        return RepositoryImpl(network)
+    }
 }

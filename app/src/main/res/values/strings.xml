@@ -17,4 +17,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="shop_name">LA DELICE</string>
     <string name="shop_subtitle">PASTRY SHOP</string>
+    <string name="transition_name_home_card_title">main</string>
+    <string name="transition_name_home_card_description">descr</string>
+    <string name="transition_name_home_card_image">image</string>
 </resources>

@@ -13,7 +13,6 @@ import android.content.Context
 import com.kevalpatel2106.pastryshop.MyApplication
 import com.kevalpatel2106.pastryshop.utils.RxSchedulers
 import dagger.Component
-import javax.inject.Named
 import javax.inject.Singleton
 
 /**
@@ -22,8 +21,8 @@ import javax.inject.Singleton
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
 @Singleton
-@Component(modules = [AppDiModule::class])
-interface AppComponent {
+@Component(modules = [BaseDiModule::class])
+interface BaseComponent {
 
     fun inject(application: MyApplication)
 

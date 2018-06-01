@@ -6,20 +6,15 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.kevalpatel2106.pastryshop.repository.di
+package com.kevalpatel2106.pastryshop.utils
 
-import com.kevalpatel2106.pastryshop.di.AppComponent
-import com.kevalpatel2106.pastryshop.di.AppDiModule
-import com.kevalpatel2106.pastryshop.utils.ApplicationScope
-import dagger.Component
+import android.arch.lifecycle.MutableLiveData
 
 /**
  * Created by Keval on 01/06/18.
  *
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
-@ApplicationScope
-@Component(dependencies = [AppComponent::class], modules = [AppDiModule::class])
-interface RepoComponent {
-
+fun <T> MutableLiveData<T>.recall(){
+    value = value
 }

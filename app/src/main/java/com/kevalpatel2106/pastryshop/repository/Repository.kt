@@ -17,7 +17,7 @@ import retrofit2.http.GET
  *
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
-internal interface Repository {
+interface Repository {
 
     fun getData(): Observable<ArrayList<HomeCards>>
 }

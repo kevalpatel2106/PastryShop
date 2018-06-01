@@ -6,28 +6,21 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.kevalpatel2106.pastryshop.repository.network
+package com.kevalpatel2106.pastryshop.di
+
+import com.kevalpatel2106.pastryshop.home.HomeFragment
+import com.kevalpatel2106.pastryshop.repository.RepoDiModule
+import com.kevalpatel2106.pastryshop.utils.ApplicationScope
+import dagger.Component
 
 /**
  * Created by Keval on 01/06/18.
  *
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
+@ApplicationScope
+@Component(dependencies = [BaseComponent::class], modules = [ViewModelFactoryModule::class, RepoDiModule::class])
+interface AppDiComponent {
 
-object NetworkConfig {
-
-    /**
-     * Request read timeout in minutes.
-     */
-    internal const val READ_TIMEOUT = 1L
-
-    /**
-     * Request write timeout in minutes.
-     */
-    internal const val WRITE_TIMEOUT = 1L
-
-    /**
-     * Network connection timeout in minutes.
-     */
-    internal const val CONNECTION_TIMEOUT = 1L
+    fun inject(homeFragment: HomeFragment)
 }

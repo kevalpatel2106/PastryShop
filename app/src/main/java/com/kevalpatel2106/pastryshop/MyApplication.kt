@@ -10,9 +10,9 @@ package com.kevalpatel2106.pastryshop
 
 import android.app.Application
 import android.content.Context
-import com.kevalpatel2106.pastryshop.di.AppComponent
-import com.kevalpatel2106.pastryshop.di.AppDiModule
-import com.kevalpatel2106.pastryshop.di.DaggerAppComponent
+import com.kevalpatel2106.pastryshop.di.BaseComponent
+import com.kevalpatel2106.pastryshop.di.BaseDiModule
+import com.kevalpatel2106.pastryshop.di.DaggerBaseComponent
 
 /**
  * Created by Keval on 01/06/18.
@@ -21,12 +21,12 @@ import com.kevalpatel2106.pastryshop.di.DaggerAppComponent
  */
 class MyApplication: Application(){
 
-    private lateinit var appComponent: AppComponent
+    private lateinit var mBaseComponent: BaseComponent
 
     companion object {
 
-        fun getSharedComponent(context: Context): AppComponent {
-            return (context.applicationContext as MyApplication).appComponent
+        fun getBaseComponent(context: Context): BaseComponent {
+            return (context.applicationContext as MyApplication).mBaseComponent
         }
     }
 
@@ -34,12 +34,12 @@ class MyApplication: Application(){
         super.onCreate()
 
         //Create app component
-        appComponent = DaggerAppComponent.builder()
-                .appDiModule(AppDiModule(this@MyApplication))
+        mBaseComponent = DaggerBaseComponent.builder()
+                .baseDiModule(BaseDiModule(this@MyApplication))
                 .build()
 
         //Inject dagger
-        appComponent.inject(this@MyApplication)
+        mBaseComponent.inject(this@MyApplication)
     }
 
 }

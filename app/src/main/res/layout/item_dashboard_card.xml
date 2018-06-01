@@ -8,13 +8,14 @@
 
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:layout_width="match_parent"
+    android:layout_width="@dimen/home_card_width"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp"
     android:orientation="vertical"
-    android:transitionName="card"
-    app:cardElevation="1dp">
+    android:transitionName="@string/transition_name_home_card_view"
+    app:cardCornerRadius="@dimen/home_card_corner_radius"
+    app:cardElevation="@dimen/home_card_elevation">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,32 +23,37 @@
         android:orientation="vertical">
 
         <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/image"
+            android:id="@+id/card_iv"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_home"
-            android:transitionName="image" />
+            android:transitionName="@string/transition_name_home_card_image"
+            tools:src="@tools:sample/avatars" />
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
+            android:id="@+id/card_title_tv"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="16dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:transitionName="main" />
+            android:layout_margin="@dimen/spacing_small"
+            android:textAllCaps="true"
+            android:textAppearance="@style/MediumText.Primary"
+            android:textStyle="bold"
+            android:transitionName="@string/transition_name_home_card_title"
+            app:fontFamily="@font/noto_sans"
+            tools:text="@tools:sample/full_names" />
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/descr"
-            android:layout_width="wrap_content"
+            android:id="@+id/card_description_tv"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_small"
+            android:layout_marginEnd="@dimen/spacing_small"
+            android:layout_marginStart="@dimen/spacing_small"
             android:ellipsize="end"
-            android:maxLines="6"
-            android:padding="16dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="#000"
-            android:transitionName="descr" />
+            android:maxLines="@integer/home_cards_description_max_line"
+            android:textAppearance="@style/SmallText.Secondary"
+            android:transitionName="@string/transition_name_home_card_description"
+            app:fontFamily="@font/noto_sans"
+            tools:text="@tools:sample/lorem/random" />
     </LinearLayout>
 </android.support.v7.widget.CardView>

@@ -8,3 +8,10 @@
 /build
 /captures
 .externalNativeBuild
+/.idea/caches/
+/.idea/assetWizardSettings.xml
+/.idea/misc.xml
+/.idea/vcs.xml
+/.idea/dictionaries/
+/.idea/inspectionProfiles/
+/.idea/codeStyles/
