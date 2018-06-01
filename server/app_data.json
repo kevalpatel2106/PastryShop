@@ -1,20 +1,20 @@
 {
-    "background": "",
+    "background": "https://raw.githubusercontent.com/kevalpatel2106/PastryShop/master/server/images/image.jpg",
     "cards" : [
         {
             "title" : "About",
             "description" : "About",
-            "image" : "About"
+            "image" : "https://raw.githubusercontent.com/kevalpatel2106/PastryShop/master/server/images/about_card_image.jpg"
         },
         {
             "title" : "Menu",
             "description" : "Menu",
-            "image" : "About"
+            "image" : "https://raw.githubusercontent.com/kevalpatel2106/PastryShop/master/server/images/menu_card_image.jpg"
         },
         {
             "title" : "Credits",
             "description" : "Credits",
-            "image" : "About"
+            "image" : "https://raw.githubusercontent.com/kevalpatel2106/PastryShop/master/server/images/credits_card_image.jpg"
         }
     ]
 }
