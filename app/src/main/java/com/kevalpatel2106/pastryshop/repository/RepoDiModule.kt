@@ -8,8 +8,11 @@
 
 package com.kevalpatel2106.pastryshop.repository
 
+import android.app.Application
 import com.kevalpatel2106.pastryshop.BuildConfig
 import com.kevalpatel2106.pastryshop.di.BaseDiModule
+import com.kevalpatel2106.pastryshop.repository.db.CardsDao
+import com.kevalpatel2106.pastryshop.repository.db.PSDatabase
 import com.kevalpatel2106.pastryshop.repository.network.Network
 import com.kevalpatel2106.pastryshop.utils.ApplicationScope
 import dagger.Module
@@ -52,7 +55,19 @@ class RepoDiModule {
 
     @Provides
     @ApplicationScope
-    fun provideRepository(network: Network): Repository {
-        return RepositoryImpl(network)
+    fun provideDatabase(application: Application): PSDatabase {
+        return PSDatabase.getAppDatabase(application)
+    }
+
+    @Provides
+    @ApplicationScope
+    fun provideCardsDao(database: PSDatabase): CardsDao {
+        return database.cardsDao()
+    }
+
+    @Provides
+    @ApplicationScope
+    fun provideRepository(network: Network, cardsDao: CardsDao): Repository {
+        return RepositoryImpl(network, cardsDao)
     }
 }

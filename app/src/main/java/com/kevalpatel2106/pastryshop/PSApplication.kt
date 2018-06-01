@@ -19,14 +19,14 @@ import com.kevalpatel2106.pastryshop.di.DaggerBaseComponent
  *
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
-class MyApplication: Application(){
+class PSApplication : Application() {
 
     private lateinit var mBaseComponent: BaseComponent
 
     companion object {
 
         fun getBaseComponent(context: Context): BaseComponent {
-            return (context.applicationContext as MyApplication).mBaseComponent
+            return (context.applicationContext as PSApplication).mBaseComponent
         }
     }
 
@@ -35,11 +35,11 @@ class MyApplication: Application(){
 
         //Create app component
         mBaseComponent = DaggerBaseComponent.builder()
-                .baseDiModule(BaseDiModule(this@MyApplication))
+                .baseDiModule(BaseDiModule(this@PSApplication))
                 .build()
 
         //Inject dagger
-        mBaseComponent.inject(this@MyApplication)
+        mBaseComponent.inject(this@PSApplication)
     }
 
 }

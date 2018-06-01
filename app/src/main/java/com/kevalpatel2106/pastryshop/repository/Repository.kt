@@ -10,7 +10,6 @@ package com.kevalpatel2106.pastryshop.repository
 
 import com.kevalpatel2106.pastryshop.bin.HomeCards
 import io.reactivex.Observable
-import retrofit2.http.GET
 
 /**
  * Created by Keval on 01/06/18.
@@ -19,5 +18,7 @@ import retrofit2.http.GET
  */
 interface Repository {
 
-    fun getData(): Observable<ArrayList<HomeCards>>
+    fun getCards(): Observable<ArrayList<HomeCards>>
+
+    fun refreshCards(): Observable<ArrayList<HomeCards>>
 }

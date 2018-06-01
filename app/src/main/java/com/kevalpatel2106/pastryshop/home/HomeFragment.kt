@@ -18,19 +18,18 @@ import android.support.design.widget.CoordinatorLayout
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
+import android.support.v7.widget.LinearSnapHelper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.kevalpatel2106.pastryshop.MyApplication
+import android.view.ViewTreeObserver
+import com.kevalpatel2106.pastryshop.PSApplication
 import com.kevalpatel2106.pastryshop.R
 import com.kevalpatel2106.pastryshop.di.DaggerAppDiComponent
 import com.kevalpatel2106.pastryshop.utils.AppLinearLayoutManager
 import com.kevalpatel2106.pastryshop.utils.showSnack
 import kotlinx.android.synthetic.main.fragment_home_frament.*
 import javax.inject.Inject
-import android.os.Build
-import android.view.ViewTreeObserver
 
 
 /**
@@ -48,7 +47,7 @@ class HomeFragment : Fragment() {
         super.onAttach(context)
 
         DaggerAppDiComponent.builder()
-                .baseComponent(MyApplication.getBaseComponent(context!!))
+                .baseComponent(PSApplication.getBaseComponent(context!!))
                 .build()
                 .inject(this@HomeFragment)
         model = ViewModelProviders
@@ -81,31 +80,45 @@ class HomeFragment : Fragment() {
         model.errorLoadingCards.observe(this@HomeFragment, Observer {
             it?.let { showSnack(it) }
         })
+        model.isLoadingCards.observe(this@HomeFragment, Observer {
+            it?.let {
+                // Disable collapsing toolbar behaviour if cards are still loading...
+                home_coordinate_layout.isAllowForScroll = !it
+            }
+        })
 
-        //Set the recycler view
+        setCardsList()
+
+        manageScrollAnimations()
+    }
+
+    private fun setCardsList() {
         home_cards_rv.layoutManager = AppLinearLayoutManager(
                 context = context!!,
                 orientation = LinearLayoutManager.HORIZONTAL,
                 reverseLayout = false
         )
-        home_cards_rv.adapter = HomeCardsAdapter(model.cards.value!!)
         home_cards_rv.addItemDecoration(CardListItemDecorator(resources.getDimensionPixelSize(R.dimen.home_card_margin)))
+        LinearSnapHelper().attachToRecyclerView(home_cards_rv)
+        home_cards_rv.adapter = HomeCardsAdapter(model.cards.value!!)
         model.cards.observe(this@HomeFragment, Observer {
             it?.let { home_cards_rv.adapter.notifyDataSetChanged() }
         })
+    }
 
-
-        // Manage the appbar scroll offsets.
+    private fun manageScrollAnimations() {
         val cardsRvInitialMargin = resources.getDimension(R.dimen.home_cards_list_initial_marin_top)
         val cardsImageMaxHeight = resources.getDimension(R.dimen.home_cards_image_max_height)
+
         var subTitleXCoordinate = 0F
-        activity_main.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+        home_coordinate_layout.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 //Remove the listener before proceeding
-                activity_main.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                home_coordinate_layout.viewTreeObserver.removeOnGlobalLayoutListener(this)
                 subTitleXCoordinate = shop_subtitle_tv.x
             }
         })
+
         home_app_bar_layout.addOnOffsetChangedListener({ appBarLayout, verticalOffset ->
 
             val percentAppBarVisible: Double = ((appBarLayout.totalScrollRange - Math.abs(verticalOffset))

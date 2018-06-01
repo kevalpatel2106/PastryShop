@@ -48,9 +48,14 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:${versions.daggerVersion}"
     compileOnly "javax.annotation:jsr250-api:1.0"
 
-    //Arch
+    //Arch component
     implementation "android.arch.lifecycle:common-java8:${versions.archComponent}"
     implementation "android.arch.lifecycle:extensions:${versions.archComponent}"
+
+    //Room database
+    implementation "android.arch.persistence.room:runtime:${versions.room}"
+    implementation "android.arch.persistence.room:rxjava2:${versions.room}"
+    kapt "android.arch.persistence.room:compiler:${versions.room}"
 
     //Retrofit and network
     implementation 'com.google.code.gson:gson:2.8.2'

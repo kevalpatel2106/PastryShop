@@ -22,8 +22,11 @@ data class GetDataResponse(
 
 data class CardsItem(
 
+        @field:SerializedName("id")
+        val id: Long,
+
         @field:SerializedName("image")
-        val image: String,
+        val image: ArrayList<String>,
 
         @field:SerializedName("description")
         val description: String,
@@ -32,7 +35,7 @@ data class CardsItem(
         val title: String
 ) {
 
-        fun toHomeCards(): HomeCards {
-                return HomeCards(title, description, image)
-        }
+    fun toHomeCards(): HomeCards {
+        return HomeCards(id, title, description, image)
+    }
 }

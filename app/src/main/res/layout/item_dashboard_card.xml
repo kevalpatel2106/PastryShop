@@ -51,6 +51,7 @@
             android:layout_marginStart="@dimen/spacing_small"
             android:ellipsize="end"
             android:maxLines="@integer/home_cards_description_max_line"
+            android:lines="@integer/home_cards_description_max_line"
             android:textAppearance="@style/SmallText.Secondary"
             android:transitionName="@string/transition_name_home_card_description"
             app:fontFamily="@font/noto_sans"

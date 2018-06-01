@@ -17,14 +17,12 @@ import android.view.View
  * Created by Keval on 01/06/18.
  *
  * @param margin desirable margin size in px between the views in the recyclerView
- * @param columns number of columns of the RecyclerView
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
 class CardListItemDecorator(private val margin: Int) : RecyclerView.ItemDecoration() {
 
     /**
-     * Set different margins for the items inside the recyclerView: no top margin for the first row
-     * and no left margin for the first column.
+     * Set different margins for the items inside the recyclerView.
      */
     override fun getItemOffsets(
             outRect: Rect,
@@ -40,6 +38,6 @@ class CardListItemDecorator(private val margin: Int) : RecyclerView.ItemDecorati
         if (position <= 0) {
             outRect.left = margin
         }
-        outRect.left = margin
+        outRect.right = margin
     }
 }

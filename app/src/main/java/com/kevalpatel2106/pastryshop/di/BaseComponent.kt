@@ -10,8 +10,7 @@ package com.kevalpatel2106.pastryshop.di
 
 import android.app.Application
 import android.content.Context
-import com.kevalpatel2106.pastryshop.MyApplication
-import com.kevalpatel2106.pastryshop.utils.RxSchedulers
+import com.kevalpatel2106.pastryshop.PSApplication
 import dagger.Component
 import javax.inject.Singleton
 
@@ -24,13 +23,11 @@ import javax.inject.Singleton
 @Component(modules = [BaseDiModule::class])
 interface BaseComponent {
 
-    fun inject(application: MyApplication)
+    fun inject(application: PSApplication)
 
     fun getContext(): Context
 
     fun getApplication(): Application
 
-    fun getBaseApplication(): MyApplication
-
-    fun getRxSchedulers(): RxSchedulers
+    fun getBaseApplication(): PSApplication
 }

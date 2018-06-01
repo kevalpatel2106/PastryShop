@@ -10,8 +10,7 @@ package com.kevalpatel2106.pastryshop.di
 
 import android.app.Application
 import android.content.Context
-import com.kevalpatel2106.pastryshop.MyApplication
-import com.kevalpatel2106.pastryshop.utils.RxSchedulers
+import com.kevalpatel2106.pastryshop.PSApplication
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -45,11 +44,7 @@ class BaseDiModule(private val application: Application) {
 
     @Singleton
     @Provides
-    fun provideBaseApplication(): MyApplication {
-        return application as MyApplication
+    fun provideBaseApplication(): PSApplication {
+        return application as PSApplication
     }
-
-    @Singleton
-    @Provides
-    fun provideRxSchedulers(): RxSchedulers = RxSchedulers()
 }

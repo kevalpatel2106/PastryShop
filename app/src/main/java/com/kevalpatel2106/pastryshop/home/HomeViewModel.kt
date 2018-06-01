@@ -12,9 +12,10 @@ import android.arch.lifecycle.MutableLiveData
 import com.kevalpatel2106.pastryshop.base.BaseViewModel
 import com.kevalpatel2106.pastryshop.bin.HomeCards
 import com.kevalpatel2106.pastryshop.repository.Repository
-import com.kevalpatel2106.pastryshop.utils.RxSchedulers
 import com.kevalpatel2106.pastryshop.utils.SingleLiveEvent
 import com.kevalpatel2106.pastryshop.utils.recall
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
@@ -23,8 +24,7 @@ import javax.inject.Inject
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
 internal class HomeViewModel @Inject constructor(
-        private val repository: Repository,
-        private val rxSchedulers: RxSchedulers
+        private val repository: Repository
 ) : BaseViewModel() {
 
     internal val cards = MutableLiveData<ArrayList<HomeCards>>()
@@ -41,18 +41,24 @@ internal class HomeViewModel @Inject constructor(
     }
 
     private fun loadCards() {
-        repository.getData()
-                .observeOn(rxSchedulers.main)
-                .subscribeOn(rxSchedulers.network)
+        val d = repository.getCards()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
                 .doOnSubscribe { isLoadingCards.value = true }
-                .doAfterTerminate { isLoadingCards.value = false }
+                .doOnError { isLoadingCards.value = false }
+                .doOnNext { isLoadingCards.value = false }
                 .subscribe({
+
+                    // Some changes occurred into the database
+                    // Rebuild the cards list.
                     cards.value!!.clear()
                     cards.value!!.addAll(it)
                     cards.recall()
                 }, {
                     errorLoadingCards.value = it.message
                 })
+
+        addDisposable(d)
     }
 
 }

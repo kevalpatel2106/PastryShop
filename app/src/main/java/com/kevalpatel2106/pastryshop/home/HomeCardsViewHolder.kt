@@ -38,11 +38,14 @@ class HomeCardsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         itemView.card_title_tv.text = card.title
         itemView.card_description_tv.text = card.description
 
+        //Set image
         itemView.card_iv.layoutParams.height = imageHeight
-        Picasso.get().load(card.image)
-                .resizeDimen(R.dimen.home_cards_image_max_height, R.dimen.home_cards_image_max_height)
-                .centerCrop()
-                .placeholder(R.drawable.ic_placeholder)
-                .into(itemView.card_iv)
+        if (imageHeight > 0) {
+            Picasso.get().load(card.image[0])
+                    .resizeDimen(R.dimen.home_cards_image_max_height, R.dimen.home_cards_image_max_height)
+                    .centerCrop()
+                    .placeholder(R.drawable.ic_placeholder)
+                    .into(itemView.card_iv)
+        }
     }
 }
