@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2018. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  ~ Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+  ~ Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+  ~ Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+  ~ Vestibulum commodo. Ut rhoncus gravida arcu.
+  -->
+
+<resources>
+    <style name="LargeText.Primary" parent="Base.TextAppearance.AppCompat.Large">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
+    <style name="MediumText.Primary" parent="Base.TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textColorHint">?android:attr/textColorSecondary</item>
+    </style>
+
+    <style name="SmallText.Primary" parent="Base.TextAppearance.AppCompat.Small">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
+    <style name="NanoText.Primary" parent="Base.TextAppearance.AppCompat.Small">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="LargeText.Secondary" parent="Base.TextAppearance.AppCompat.Large">
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+    </style>
+
+    <style name="MediumText.Secondary" parent="Base.TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+    </style>
+
+    <style name="SmallText.Secondary" parent="Base.TextAppearance.AppCompat.Small">
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+    </style>
+
+    <style name="NanoText.Secondary" parent="Base.TextAppearance.AppCompat.Small">
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="LargeText.Accent" parent="Base.TextAppearance.AppCompat.Large">
+        <item name="android:textColor">?android:attr/colorAccent</item>
+    </style>
+
+    <style name="MediumText.Accent" parent="Base.TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">?android:attr/colorAccent</item>
+        <item name="android:textColorHint">?android:attr/textColorSecondary</item>
+    </style>
+
+    <style name="SmallText.Accent" parent="Base.TextAppearance.AppCompat.Small">
+        <item name="android:textColor">?android:attr/colorAccent</item>
+    </style>
+
+    <style name="NanoText.Accent" parent="Base.TextAppearance.AppCompat.Small">
+        <item name="android:textColor">?android:attr/colorAccent</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="LargeText.White" parent="Base.TextAppearance.AppCompat.Large">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="MediumText.White" parent="Base.TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorHint">?android:attr/textColorSecondary</item>
+    </style>
+
+    <style name="SmallText.White" parent="Base.TextAppearance.AppCompat.Small">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="NanoText.White" parent="Base.TextAppearance.AppCompat.Small">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="ToolbarColoredBackArrow" parent="AppTheme">
+        <item name="android:textColorSecondary">@android:color/white</item>
+    </style>
+</resources>

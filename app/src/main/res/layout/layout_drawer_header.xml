@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2018. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  ~ Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+  ~ Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+  ~ Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+  ~ Vestibulum commodo. Ut rhoncus gravida arcu.
+  -->
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/nav_drawer_header_height"
+    android:background="@drawable/nav_header_bg_image">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline47"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/md_activity_horizontal_margin" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline48"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/md_activity_horizontal_margin" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline49"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/md_activity_vertical_margin" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="@dimen/md_activity_vertical_margin" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/drawer_header_profile_iv"
+        android:layout_width="@dimen/spacing_xxlarge"
+        android:layout_height="@dimen/spacing_xxlarge"
+        app:layout_constraintBottom_toTopOf="@+id/drawer_header_name_tv"
+        app:layout_constraintStart_toStartOf="@+id/guideline48"
+        app:layout_constraintTop_toTopOf="@+id/guideline49"
+        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:src="@tools:sample/avatars" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/drawer_header_name_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textAppearance="@style/MediumText.Primary"
+        app:layout_constraintBottom_toTopOf="@+id/guideline50"
+        app:layout_constraintEnd_toStartOf="@+id/guideline47"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/guideline48"
+        app:layout_constraintTop_toBottomOf="@+id/drawer_header_profile_iv"
+        tools:text="@tools:sample/full_names" />
+
+</android.support.constraint.ConstraintLayout>

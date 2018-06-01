@@ -1,0 +1,20 @@
+{
+    "background": "",
+    "cards" : [
+        {
+            "title" : "About",
+            "description" : "About",
+            "image" : "About"
+        },
+        {
+            "title" : "Menu",
+            "description" : "Menu",
+            "image" : "About"
+        },
+        {
+            "title" : "Credits",
+            "description" : "Credits",
+            "image" : "About"
+        }
+    ]
+}

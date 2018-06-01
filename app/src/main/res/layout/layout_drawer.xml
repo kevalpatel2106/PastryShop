@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2018. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  ~ Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+  ~ Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+  ~ Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+  ~ Vestibulum commodo. Ut rhoncus gravida arcu.
+  -->
+
+<!--Navigation drawer to display in dashboard.-->
+<android.support.design.widget.NavigationView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_navigation_view"
+    android:layout_width="@dimen/navigation_drawer_width"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:choiceMode="singleChoice"
+    android:divider="@color/colorSecondaryText"
+    android:dividerHeight="@dimen/md_divider_height"
+    android:fitsSystemWindows="true"
+    app:elevation="@dimen/spacing_small"
+    app:headerLayout="@layout/layout_drawer_header"
+    app:itemBackground="?selectableItemBackground"
+    app:itemIconTint="@color/nav_drawer_icon_tint_color"
+    app:itemTextColor="@color/nav_drawer_text_color"
+    app:menu="@menu/drawer_menu" />
