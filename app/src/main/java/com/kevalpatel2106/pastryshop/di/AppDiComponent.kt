@@ -8,6 +8,7 @@
 
 package com.kevalpatel2106.pastryshop.di
 
+import com.kevalpatel2106.pastryshop.SplashActivity
 import com.kevalpatel2106.pastryshop.home.HomeFragment
 import com.kevalpatel2106.pastryshop.pageDetail.DetailFragment
 import com.kevalpatel2106.pastryshop.repository.RepoDiModule
@@ -26,4 +27,6 @@ interface AppDiComponent {
     fun inject(homeFragment: HomeFragment)
 
     fun inject(detailFragment: DetailFragment)
+
+    fun inject(splashActivity: SplashActivity)
 }

@@ -16,9 +16,17 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug{
+            debuggable true
+
+            buildConfigField "String", "BASE_URL", '"https://rawgit.com/kevalpatel2106/PastryShop/master/server/"'
+        }
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            buildConfigField "String", "BASE_URL", '"https://rawgit.com/kevalpatel2106/PastryShop/master/server/"'
         }
     }
     compileOptions {
@@ -67,8 +75,25 @@ dependencies {
 
     implementation 'com.squareup.picasso:picasso:2.71828'
 
-    //Tests
+    //Unit tests dependencies
     testImplementation 'junit:junit:4.12'
+    testImplementation "com.android.support.test:monitor:1.0.2"
+    testImplementation 'com.android.support.test:runner:1.0.2'
+    testImplementation 'com.android.support.test:rules:1.0.2'
+    testImplementation "com.squareup.okhttp3:mockwebserver:${versions.okHttp}"
+    testImplementation "org.mockito:mockito-core:2.15.0"
+    testImplementation "org.robolectric:robolectric:3.8"
+    testImplementation "android.arch.persistence.room:testing:${versions.room}"
+    testImplementation "android.arch.core:core-testing:${versions.archComponent}"
+
+    //UI tests dependencies
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation "com.android.support.test.espresso:espresso-core:${versions.espresso}"
+    androidTestImplementation "com.android.support.test.espresso:espresso-intents:${versions.espresso}"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:${versions.espresso}"
+    androidTestImplementation "com.android.support.test.espresso:espresso-idling-resource:${versions.espresso}"
+    androidTestImplementation "com.squareup.okhttp3:mockwebserver:${versions.okHttp}"
+
+    testImplementation project(':testutils')
+    androidTestImplementation project(':testutils')
 }

@@ -52,7 +52,7 @@ class BaseDiModule(private val application: Application) {
 
     @Singleton
     @Provides
-    fun provideSharedPrefranceProvider(context: Context): SharedPrefsProvider {
+    fun provideSharedPreferenceProvider(context: Context): SharedPrefsProvider {
         return SharedPrefsProvider(PreferenceManager.getDefaultSharedPreferences(context))
     }
 }

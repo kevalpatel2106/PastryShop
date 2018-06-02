@@ -37,7 +37,7 @@ class RepoDiModule {
     @ApplicationScope
     @Named(BaseDiModule.BASE_URL)
     internal fun provideBaseUrl(): String {
-        return "https://rawgit.com/kevalpatel2106/PastryShop/master/server/"
+        return BuildConfig.BASE_URL
     }
 
     @Provides

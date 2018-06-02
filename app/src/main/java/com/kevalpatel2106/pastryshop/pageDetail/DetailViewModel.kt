@@ -9,9 +9,9 @@
 package com.kevalpatel2106.pastryshop.pageDetail
 
 import android.arch.lifecycle.MutableLiveData
-import com.kevalpatel2106.pastryshop.base.BaseViewModel
 import com.kevalpatel2106.pastryshop.bin.Pages
 import com.kevalpatel2106.pastryshop.repository.Repository
+import com.kevalpatel2106.pastryshop.utils.BaseViewModel
 import com.kevalpatel2106.pastryshop.utils.SingleLiveEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

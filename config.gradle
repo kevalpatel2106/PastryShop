@@ -10,7 +10,7 @@ ext {
     versions = [
             'kotlin'        : '1.2.41',
             'supportLibrary': '27.1.1',
-            'espresso'      : '3.0.1',
+            'espresso'      : '3.0.2',
             'okHttp'        : "3.10.0",
             'retrofit'      : "2.3.0",
             'archComponent' : "1.1.1",

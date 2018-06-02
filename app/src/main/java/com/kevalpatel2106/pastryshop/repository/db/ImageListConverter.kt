@@ -24,7 +24,7 @@ class ImageListConverter {
         return if (value == null) {
             ArrayList()
         } else {
-            value.split(",").toList() as ArrayList<String>
+            ArrayList(value.split(",").toList())
         }
     }
 

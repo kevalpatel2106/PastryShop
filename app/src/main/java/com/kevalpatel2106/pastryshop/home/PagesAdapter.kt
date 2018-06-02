@@ -22,6 +22,8 @@ internal class PagesAdapter(
         private val pageSelectionListener: PageSelectionListener)
     : RecyclerView.Adapter<HomeCardsViewHolder>() {
 
+    var isClickEnabled = true
+
     internal var imageHeight = 0
         set(value) {
             field = value
@@ -39,7 +41,9 @@ internal class PagesAdapter(
                 page = cards[position],
                 imageHeight = imageHeight,
                 onClick = {
-                    pageSelectionListener.onPageSelected(it, holder.itemView)
+                    if (isClickEnabled) {
+                        pageSelectionListener.onPageSelected(it, holder.itemView)
+                    }
                 }
         )
     }

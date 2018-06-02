@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2018. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
   ~ Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
   ~ Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
@@ -9,7 +8,6 @@
 
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_drawer_header_height"
     android:background="@drawable/nav_header_bg_image">
@@ -48,10 +46,11 @@
         android:layout_height="@dimen/spacing_xxlarge"
         app:layout_constraintBottom_toTopOf="@+id/drawer_header_name_tv"
         app:layout_constraintStart_toStartOf="@+id/guideline48"
+        android:elevation="@dimen/spacing_small"
         app:layout_constraintTop_toTopOf="@+id/guideline49"
         app:layout_constraintVertical_bias="1.0"
         app:layout_constraintVertical_chainStyle="packed"
-        tools:src="@tools:sample/avatars" />
+        app:srcCompat="@drawable/ic_user" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/drawer_header_name_tv"
@@ -59,15 +58,15 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
-        app:fontFamily="@font/noto_sans"
         android:maxLines="1"
         android:singleLine="true"
-        android:textAppearance="@style/MediumText.Primary"
+        android:text="@string/sample_user_display_name"
+        android:textAppearance="@style/MediumText.White"
         app:layout_constraintBottom_toTopOf="@+id/guideline50"
         app:layout_constraintEnd_toStartOf="@+id/guideline47"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/guideline48"
         app:layout_constraintTop_toBottomOf="@+id/drawer_header_profile_iv"
-        tools:text="@tools:sample/full_names" />
+        app:fontFamily="@font/noto_sans" />
 
 </android.support.constraint.ConstraintLayout>

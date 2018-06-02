@@ -19,10 +19,13 @@ import io.reactivex.Single
 
 /**
  * Created by Keval on 01/06/18.
+ * Concrete implementation of the [Repository]. This class provides required data to other layer
+ * of the application (such as views and view models) by managing caches and network requests.
  *
  * @param network [Network] for  saving data into network
  * @param pagesDao [PagesDao] for saving data into database
  * @param sharedPrefsProvider [SharedPrefsProvider] for saving data into shared preferences
+ * @see Repository
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
 internal class RepositoryImpl(private val network: Network,

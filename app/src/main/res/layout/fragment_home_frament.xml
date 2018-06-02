@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.kevalpatel2106.pastryshop.base.PSCoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.kevalpatel2106.pastryshop.utils.PSCoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_coordinate_layout"
@@ -125,4 +125,4 @@
             app:fabSize="normal"
             app:rippleColor="@android:color/darker_gray" />
     </FrameLayout>
-</com.kevalpatel2106.pastryshop.base.PSCoordinatorLayout>
+</com.kevalpatel2106.pastryshop.utils.PSCoordinatorLayout>

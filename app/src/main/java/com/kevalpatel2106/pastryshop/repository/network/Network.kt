@@ -8,6 +8,7 @@
 
 package com.kevalpatel2106.pastryshop.repository.network
 
+import android.support.annotation.VisibleForTesting
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -38,7 +39,8 @@ class Network(private val baseUrl: String, enableLog: Boolean) {
      *
      * @see .getOkHttpClientBuilder
      */
-    private val okHttpClient: OkHttpClient
+    @VisibleForTesting
+    internal val okHttpClient: OkHttpClient
 
     /**
      * [RxJava2CallAdapterFactory] for converting responses to Rx observables.

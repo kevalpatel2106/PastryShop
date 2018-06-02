@@ -40,6 +40,8 @@ import javax.inject.Inject
 /**
  * A simple [Fragment] subclass. This is the home screen of the application which contains the list
  * of cards for application pages and contact information.
+ *
+ * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
 class HomeFragment : Fragment(), PageSelectionListener {
 
@@ -84,6 +86,9 @@ class HomeFragment : Fragment(), PageSelectionListener {
         model.errorLoadingPages.observe(this@HomeFragment, Observer {
             it?.let { showSnack(it) }
         })
+        model.errorLoadingContact.observe(this@HomeFragment, Observer {
+            it?.let { showSnack(it) }
+        })
         model.isBlockUi.observe(this@HomeFragment, Observer {
             it?.let {
                 // Disable collapsing toolbar behaviour if pages are still loading...
@@ -99,7 +104,7 @@ class HomeFragment : Fragment(), PageSelectionListener {
         manageScrollAnimations()
 
         // Set FAB
-        phone_fab.setOnClickListener { context?.let { model.call(it) } }
+        phone_fab.setOnClickListener { context?.let { model.callRestaurant(it) } }
     }
 
     private fun setPagesList() {
@@ -162,6 +167,7 @@ class HomeFragment : Fragment(), PageSelectionListener {
             // Control the scroll of the recycler view.
             // Recycler view should only scroll when the pages are fully visible (i.e. images in the card is fully visible).
             (home_pages_rv.layoutManager as PSLinearLayoutManager).isScrollEnabled = percentAppBarVisible < 0.20
+            (home_pages_rv.adapter as PagesAdapter).isClickEnabled = percentAppBarVisible < 0.20
 
             //Animate the subtitle text view
             if (subTitleXCoordinate > 0) {  // Make sure that OnGlobalLayoutListener is called once and we have the real x coordinate
