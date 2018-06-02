@@ -9,7 +9,6 @@
 package com.kevalpatel2106.pastryshop.main
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v7.app.ActionBarDrawerToggle
@@ -63,6 +62,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 if (supportFragmentManager.findFragmentById(R.id.container) !is HomeFragment) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.main_container, HomeFragment())
+                            .addToBackStack(null)   // Don't add into the back stack
                             .commit()
                     supportFragmentManager.executePendingTransactions()
                 }

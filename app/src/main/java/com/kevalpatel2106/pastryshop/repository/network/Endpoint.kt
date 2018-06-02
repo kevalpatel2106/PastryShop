@@ -8,7 +8,7 @@
 
 package com.kevalpatel2106.pastryshop.repository.network
 
-import io.reactivex.Observable
+import io.reactivex.Single
 import retrofit2.http.GET
 
 /**
@@ -19,5 +19,5 @@ import retrofit2.http.GET
 interface Endpoint {
 
     @GET("app_data.json")
-    fun getData(): Observable<GetDataResponse>
+    fun getData(): Single<GetDataResponse>
 }

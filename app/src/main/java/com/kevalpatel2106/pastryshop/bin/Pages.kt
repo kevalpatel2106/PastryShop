@@ -17,30 +17,30 @@ import android.arch.persistence.room.PrimaryKey
  *
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
-@Entity(tableName = HomeCards.CARDS_TABLE)
-data class HomeCards(
+@Entity(tableName = Pages.PAGES_TABLE)
+data class Pages(
 
         @PrimaryKey(autoGenerate = false)
-        @ColumnInfo(name = CARDS_ID)
+        @ColumnInfo(name = PAGE_ID)
         var id: Long,
 
-        @ColumnInfo(name = CARDS_NAME)
+        @ColumnInfo(name = PAGE_NAME)
         val title: String,
 
-        @ColumnInfo(name = CARDS_DESCRIPTION)
+        @ColumnInfo(name = PAGE_DESCRIPTION)
         val description: String,
 
         val image: ArrayList<String>
 ) {
 
-    @ColumnInfo(name = CARDS_UPDATE_TIME)
+    @ColumnInfo(name = PAGE_UPDATE_TIME)
     var updateMills: Long = 0
 
     companion object {
-        const val CARDS_TABLE = "card_table"
-        const val CARDS_ID = "card_id"
-        const val CARDS_NAME = "card_name"
-        const val CARDS_DESCRIPTION = "card_description"
-        const val CARDS_UPDATE_TIME = "update_time"
+        const val PAGES_TABLE = "pages_table"
+        const val PAGE_ID = "page_id"
+        const val PAGE_NAME = "page_name"
+        const val PAGE_DESCRIPTION = "page_description"
+        const val PAGE_UPDATE_TIME = "update_time"
     }
 }

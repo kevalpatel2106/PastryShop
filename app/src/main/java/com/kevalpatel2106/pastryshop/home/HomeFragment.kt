@@ -15,7 +15,9 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.CoordinatorLayout
+import android.support.transition.TransitionInflater
 import android.support.v4.app.Fragment
+import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.LinearSnapHelper
@@ -25,18 +27,21 @@ import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import com.kevalpatel2106.pastryshop.PSApplication
 import com.kevalpatel2106.pastryshop.R
+import com.kevalpatel2106.pastryshop.bin.Pages
 import com.kevalpatel2106.pastryshop.di.DaggerAppDiComponent
-import com.kevalpatel2106.pastryshop.utils.AppLinearLayoutManager
+import com.kevalpatel2106.pastryshop.pageDetail.DetailFragment
+import com.kevalpatel2106.pastryshop.utils.PSLinearLayoutManager
 import com.kevalpatel2106.pastryshop.utils.showSnack
 import kotlinx.android.synthetic.main.fragment_home_frament.*
+import kotlinx.android.synthetic.main.item_dashboard_card.view.*
 import javax.inject.Inject
 
 
 /**
- * A simple [Fragment] subclass.
- *
+ * A simple [Fragment] subclass. This is the home screen of the application which contains the list
+ * of cards for application pages and contact information.
  */
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), PageSelectionListener {
 
     private lateinit var model: HomeViewModel
 
@@ -53,7 +58,6 @@ class HomeFragment : Fragment() {
         model = ViewModelProviders
                 .of(this@HomeFragment, viewModelProvider)
                 .get(HomeViewModel::class.java)
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -77,32 +81,42 @@ class HomeFragment : Fragment() {
         }
 
         // Handle errors
-        model.errorLoadingCards.observe(this@HomeFragment, Observer {
+        model.errorLoadingPages.observe(this@HomeFragment, Observer {
             it?.let { showSnack(it) }
         })
-        model.isLoadingCards.observe(this@HomeFragment, Observer {
+        model.isLoadingPages.observe(this@HomeFragment, Observer {
             it?.let {
-                // Disable collapsing toolbar behaviour if cards are still loading...
+                // Disable collapsing toolbar behaviour if pages are still loading...
                 home_coordinate_layout.isAllowForScroll = !it
             }
         })
 
-        setCardsList()
+        setPagesList()
 
         manageScrollAnimations()
     }
 
-    private fun setCardsList() {
-        home_cards_rv.layoutManager = AppLinearLayoutManager(
+    private fun setPagesList() {
+        //Prepare to horizontal linear layout manager.
+        home_pages_rv.layoutManager = PSLinearLayoutManager(
                 context = context!!,
                 orientation = LinearLayoutManager.HORIZONTAL,
                 reverseLayout = false
         )
-        home_cards_rv.addItemDecoration(CardListItemDecorator(resources.getDimensionPixelSize(R.dimen.home_card_margin)))
-        LinearSnapHelper().attachToRecyclerView(home_cards_rv)
-        home_cards_rv.adapter = HomeCardsAdapter(model.cards.value!!)
-        model.cards.observe(this@HomeFragment, Observer {
-            it?.let { home_cards_rv.adapter.notifyDataSetChanged() }
+
+        // Decorate each items!!!
+        home_pages_rv.addItemDecoration(PagesListItemDecorator(resources.getDimensionPixelSize(R.dimen.home_card_margin)))
+
+        // Snap the item to the center
+        LinearSnapHelper().attachToRecyclerView(home_pages_rv)
+
+        // Set the adapter and observe the pages list changes.
+        home_pages_rv.adapter = PagesAdapter(
+                cards = model.pages.value!!,
+                pageSelectionListener = this@HomeFragment
+        )
+        model.pages.observe(this@HomeFragment, Observer {
+            it?.let { home_pages_rv.adapter.notifyDataSetChanged() }
         })
     }
 
@@ -111,13 +125,16 @@ class HomeFragment : Fragment() {
         val cardsImageMaxHeight = resources.getDimension(R.dimen.home_cards_image_max_height)
 
         var subTitleXCoordinate = 0F
-        home_coordinate_layout.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
-            override fun onGlobalLayout() {
-                //Remove the listener before proceeding
-                home_coordinate_layout.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                subTitleXCoordinate = shop_subtitle_tv.x
-            }
-        })
+        home_coordinate_layout.viewTreeObserver
+                .addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+
+                    override fun onGlobalLayout() {
+
+                        //Remove the listener before proceeding
+                        home_coordinate_layout.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                        subTitleXCoordinate = shop_subtitle_tv.x
+                    }
+                })
 
         home_app_bar_layout.addOnOffsetChangedListener({ appBarLayout, verticalOffset ->
 
@@ -127,18 +144,18 @@ class HomeFragment : Fragment() {
             // Change the margin of the recycler view.
             // It will o from -100dp to 0dp as the appbar shrinks
             val newTopMargin = percentAppBarVisible * cardsRvInitialMargin
-            val lp: CoordinatorLayout.LayoutParams = home_cards_rv.layoutParams as CoordinatorLayout.LayoutParams
+            val lp: CoordinatorLayout.LayoutParams = home_pages_rv.layoutParams as CoordinatorLayout.LayoutParams
             lp.topMargin = newTopMargin.toInt()
-            home_cards_rv.layoutParams = lp
+            home_pages_rv.layoutParams = lp
 
             // Change the height of the image in each card.
             // As the appbar shrinks, the image height should increase.
             val newHeight = (Math.abs(verticalOffset) / appBarLayout.totalScrollRange.toDouble() * cardsImageMaxHeight).toInt()
-            (home_cards_rv.adapter as HomeCardsAdapter).imageHeight = newHeight
+            (home_pages_rv.adapter as PagesAdapter).imageHeight = newHeight
 
             // Control the scroll of the recycler view.
-            // Recycler view should only scroll when the cards are fully visible (i.e. images in the card is fully visible).
-            (home_cards_rv.layoutManager as AppLinearLayoutManager).isScrollEnabled = percentAppBarVisible < 0.20
+            // Recycler view should only scroll when the pages are fully visible (i.e. images in the card is fully visible).
+            (home_pages_rv.layoutManager as PSLinearLayoutManager).isScrollEnabled = percentAppBarVisible < 0.20
 
             //Animate the subtitle text view
             if (subTitleXCoordinate > 0) {  // Make sure that OnGlobalLayoutListener is called once and we have the real x coordinate
@@ -149,4 +166,37 @@ class HomeFragment : Fragment() {
         })
     }
 
+    override fun onPageSelected(page: Pages, itemView: View) {
+        val detailFragment = DetailFragment.newInstance(
+                context = context!!,
+                id = page.id,
+                name = page.title,
+                description = page.description,
+                images = page.image
+        )
+
+        //Exit transition
+        sharedElementReturnTransition = TransitionInflater.from(context)
+                .inflateTransition(R.transition.detail_transition)
+        exitTransition = TransitionInflater.from(context)
+                .inflateTransition(android.R.transition.fade)
+
+        @Suppress("ReplaceSingleLineLet")
+        activity?.let {
+            it.supportFragmentManager.beginTransaction()
+                    .replace(R.id.main_container, detailFragment)
+                    .addToBackStack(DETAIL_BACK_STACK_NAME)
+                    .addSharedElement(itemView.card_title_tv, ViewCompat.getTransitionName(itemView.card_title_tv))
+                    .addSharedElement(itemView.card_description_tv, ViewCompat.getTransitionName(itemView.card_description_tv))
+                    .addSharedElement(itemView.card_iv, ViewCompat.getTransitionName(itemView.card_iv))
+                    .addSharedElement(itemView.card, ViewCompat.getTransitionName(itemView.card))
+                    .commit()
+            it.supportFragmentManager.executePendingTransactions()
+
+        }
+    }
+
+    companion object {
+        private const val DETAIL_BACK_STACK_NAME = "detail"
+    }
 }

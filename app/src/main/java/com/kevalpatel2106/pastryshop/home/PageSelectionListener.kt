@@ -6,22 +6,17 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.kevalpatel2106.pastryshop.repository
+package com.kevalpatel2106.pastryshop.home
 
+import android.view.View
 import com.kevalpatel2106.pastryshop.bin.Pages
-import io.reactivex.Observable
-import io.reactivex.Single
 
 /**
- * Created by Keval on 01/06/18.
+ * Created by Keval on 02/06/18.
  *
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
-interface Repository {
+internal interface PageSelectionListener {
 
-    fun getPages(): Observable<ArrayList<Pages>>
-
-    fun getPage(pageId: Long): Observable<Pages>
-
-    fun refreshData(): Single<ArrayList<Pages>>
+    fun onPageSelected(page: Pages, itemView: View)
 }

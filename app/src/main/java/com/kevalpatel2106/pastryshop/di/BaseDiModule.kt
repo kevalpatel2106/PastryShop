@@ -10,7 +10,9 @@ package com.kevalpatel2106.pastryshop.di
 
 import android.app.Application
 import android.content.Context
+import android.preference.PreferenceManager
 import com.kevalpatel2106.pastryshop.PSApplication
+import com.kevalpatel2106.pastryshop.utils.SharedPrefsProvider
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -46,5 +48,11 @@ class BaseDiModule(private val application: Application) {
     @Provides
     fun provideBaseApplication(): PSApplication {
         return application as PSApplication
+    }
+
+    @Singleton
+    @Provides
+    fun provideSharedPrefranceProvider(context: Context): SharedPrefsProvider {
+        return SharedPrefsProvider(PreferenceManager.getDefaultSharedPreferences(context))
     }
 }

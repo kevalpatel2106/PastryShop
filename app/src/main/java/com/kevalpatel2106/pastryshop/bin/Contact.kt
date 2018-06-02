@@ -6,22 +6,25 @@
  * Vestibulum commodo. Ut rhoncus gravida arcu.
  */
 
-package com.kevalpatel2106.pastryshop.repository
-
-import com.kevalpatel2106.pastryshop.bin.Pages
-import io.reactivex.Observable
-import io.reactivex.Single
+package com.kevalpatel2106.pastryshop.bin
 
 /**
- * Created by Keval on 01/06/18.
+ * Created by Keval on 02/06/18.
  *
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
-interface Repository {
+data class Contact(
 
-    fun getPages(): Observable<ArrayList<Pages>>
+        val phone: String,
 
-    fun getPage(pageId: Long): Observable<Pages>
+        val email: String,
 
-    fun refreshData(): Single<ArrayList<Pages>>
+        val twitter: String
+) {
+
+    companion object {
+        const val PREF_KEY_PHONE = "phone"
+        const val PREF_KEY_EMAIL = "email"
+        const val PREF_KEY_TWITTER = "twitter"
+    }
 }

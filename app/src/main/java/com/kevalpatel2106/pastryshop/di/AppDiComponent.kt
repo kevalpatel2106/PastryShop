@@ -9,6 +9,7 @@
 package com.kevalpatel2106.pastryshop.di
 
 import com.kevalpatel2106.pastryshop.home.HomeFragment
+import com.kevalpatel2106.pastryshop.pageDetail.DetailFragment
 import com.kevalpatel2106.pastryshop.repository.RepoDiModule
 import com.kevalpatel2106.pastryshop.utils.ApplicationScope
 import dagger.Component
@@ -23,4 +24,6 @@ import dagger.Component
 interface AppDiComponent {
 
     fun inject(homeFragment: HomeFragment)
+
+    fun inject(detailFragment: DetailFragment)
 }

@@ -93,8 +93,9 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
+    <!--List to display pages horizontally-->
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/home_cards_rv"
+        android:id="@+id/home_pages_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/home_cards_list_initial_marin_top"

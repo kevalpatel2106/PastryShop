@@ -15,14 +15,16 @@ import android.view.View
 
 /**
  * Created by Keval on 01/06/18.
+ * [RecyclerView.ItemDecoration] to add margins to each items.
  *
  * @param margin desirable margin size in px between the views in the recyclerView
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
-class CardListItemDecorator(private val margin: Int) : RecyclerView.ItemDecoration() {
+class PagesListItemDecorator(private val margin: Int) : RecyclerView.ItemDecoration() {
 
     /**
-     * Set different margins for the items inside the recyclerView.
+     * Set different margins for the items inside the recyclerView. It will set [margin] to top,
+     * right and bottom of the list. If the item is at the first position, left margin will be [margin].
      */
     override fun getItemOffsets(
             outRect: Rect,

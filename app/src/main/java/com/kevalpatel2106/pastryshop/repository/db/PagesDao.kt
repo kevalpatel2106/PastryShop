@@ -12,8 +12,9 @@ import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
 import android.arch.persistence.room.Update
-import com.kevalpatel2106.pastryshop.bin.HomeCards
+import com.kevalpatel2106.pastryshop.bin.Pages
 import io.reactivex.Flowable
+import io.reactivex.Single
 
 /**
  * Created by Keval on 01/06/18.
@@ -21,26 +22,32 @@ import io.reactivex.Flowable
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
 @Dao
-interface CardsDao {
+interface PagesDao {
 
     @Insert
-    fun insert(cards: HomeCards): Long
+    fun insert(cards: Pages): Long
 
     @Update
-    fun update(cards: HomeCards): Int
+    fun update(cards: Pages): Int
 
-    @Query("SELECT COUNT(*) FROM ${HomeCards.CARDS_TABLE}")
-    fun getCount(): Flowable<Int>
+    @Query("SELECT COUNT(*) FROM ${Pages.PAGES_TABLE}")
+    fun getCount(): Single<Int>
 
-    @Query("SELECT * FROM ${HomeCards.CARDS_TABLE}")
-    fun getAllCards(): Flowable<List<HomeCards>>
+    @Query("SELECT * FROM ${Pages.PAGES_TABLE}")
+    fun getAllCards(): Flowable<List<Pages>>
 
-    @Query("SELECT * FROM ${HomeCards.CARDS_TABLE} WHERE ${HomeCards.CARDS_ID}=:id")
-    fun getCardFromId(id: Long): HomeCards?
+    @Query("SELECT * FROM ${Pages.PAGES_TABLE} WHERE ${Pages.PAGE_ID}=:id")
+    fun getCardFromId(id: Long): Pages?
 
-    @Query("DELETE FROM ${HomeCards.CARDS_TABLE} WHERE ${HomeCards.CARDS_UPDATE_TIME}<:updateTime")
+    @Query("SELECT * FROM ${Pages.PAGES_TABLE} WHERE ${Pages.PAGE_ID}=:id")
+    fun observePage(id: Long): Flowable<Pages>
+
+    @Query("SELECT COUNT(*) FROM ${Pages.PAGES_TABLE} WHERE ${Pages.PAGE_ID}=:id")
+    fun hasPage(id: Long): Single<Int>
+
+    @Query("DELETE FROM ${Pages.PAGES_TABLE} WHERE ${Pages.PAGE_UPDATE_TIME}<:updateTime")
     fun deleteNotUpdatedCards(updateTime: Long)
 
-    @Query("DELETE FROM ${HomeCards.CARDS_TABLE}")
+    @Query("DELETE FROM ${Pages.PAGES_TABLE}")
     fun nukeTable()
 }

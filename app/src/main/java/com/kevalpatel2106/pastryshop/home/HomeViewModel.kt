@@ -10,7 +10,7 @@ package com.kevalpatel2106.pastryshop.home
 
 import android.arch.lifecycle.MutableLiveData
 import com.kevalpatel2106.pastryshop.base.BaseViewModel
-import com.kevalpatel2106.pastryshop.bin.HomeCards
+import com.kevalpatel2106.pastryshop.bin.Pages
 import com.kevalpatel2106.pastryshop.repository.Repository
 import com.kevalpatel2106.pastryshop.utils.SingleLiveEvent
 import com.kevalpatel2106.pastryshop.utils.recall
@@ -20,6 +20,8 @@ import javax.inject.Inject
 
 /**
  * Created by Keval on 01/06/18.
+ * View model for [HomeFragment]. This view model is responsible for loading the pages information
+ * from the database or network.
  *
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
@@ -27,35 +29,47 @@ internal class HomeViewModel @Inject constructor(
         private val repository: Repository
 ) : BaseViewModel() {
 
-    internal val cards = MutableLiveData<ArrayList<HomeCards>>()
+    /**
+     * [MutableLiveData] of [Pages] to display on the view. View can observe this to get notify
+     * whenever the list changes.
+     */
+    internal val pages = MutableLiveData<ArrayList<Pages>>()
 
-    internal val isLoadingCards = MutableLiveData<Boolean>()
+    internal val isLoadingPages = MutableLiveData<Boolean>()
 
-    internal val errorLoadingCards = SingleLiveEvent<String>()
+    internal val errorLoadingPages = SingleLiveEvent<String>()
 
     init {
-        cards.value = ArrayList()
-        isLoadingCards.value = false
+        // Initialize
+        pages.value = ArrayList()
+        isLoadingPages.value = false
 
-        loadCards()
+        //Start loading the pages.
+        loadPages()
     }
 
-    private fun loadCards() {
-        val d = repository.getCards()
+    /**
+     * Load the list of [Pages] to display in the view. View can observe [pages] to get notify about
+     * changes.
+     */
+    private fun loadPages() {
+        val d = repository.getPages()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .doOnSubscribe { isLoadingCards.value = true }
-                .doOnError { isLoadingCards.value = false }
-                .doOnNext { isLoadingCards.value = false }
+                .doOnSubscribe { isLoadingPages.value = true }
+                .doOnError { isLoadingPages.value = false }
+                .doOnNext { isLoadingPages.value = false }
                 .subscribe({
 
                     // Some changes occurred into the database
-                    // Rebuild the cards list.
-                    cards.value!!.clear()
-                    cards.value!!.addAll(it)
-                    cards.recall()
+                    // Rebuild the pages list.
+                    pages.value!!.clear()
+                    pages.value!!.addAll(it)
+                    pages.recall()
                 }, {
-                    errorLoadingCards.value = it.message
+
+                    // Something went wrong.
+                    errorLoadingPages.value = it.message
                 })
 
         addDisposable(d)

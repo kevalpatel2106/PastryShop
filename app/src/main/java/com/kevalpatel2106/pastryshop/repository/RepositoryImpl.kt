@@ -8,85 +8,127 @@
 
 package com.kevalpatel2106.pastryshop.repository
 
-import com.kevalpatel2106.pastryshop.bin.HomeCards
-import com.kevalpatel2106.pastryshop.repository.db.CardsDao
+import com.kevalpatel2106.pastryshop.bin.Contact
+import com.kevalpatel2106.pastryshop.bin.Pages
+import com.kevalpatel2106.pastryshop.repository.db.PagesDao
 import com.kevalpatel2106.pastryshop.repository.network.Endpoint
 import com.kevalpatel2106.pastryshop.repository.network.Network
+import com.kevalpatel2106.pastryshop.utils.SharedPrefsProvider
 import io.reactivex.Observable
+import io.reactivex.Single
+import io.reactivex.exceptions.Exceptions
 
 /**
  * Created by Keval on 01/06/18.
  *
+ * @param network [Network] for  saving data into network
+ * @param pagesDao [PagesDao] for saving data into database
+ * @param sharedPrefsProvider [SharedPrefsProvider] for saving data into shared preferences
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
 internal class RepositoryImpl(private val network: Network,
-                              private val cardsDao: CardsDao) : Repository {
+                              private val pagesDao: PagesDao,
+                              private val sharedPrefsProvider: SharedPrefsProvider) : Repository {
 
-    override fun refreshCards(): Observable<ArrayList<HomeCards>> {
+    override fun refreshData(): Single<ArrayList<Pages>> {
 
         return network.getRetrofitClient()
                 .create(Endpoint::class.java)
                 .getData()  // Make network request
                 .map {
-                    // Convert the response into the list of cards to save in database.
+
+                    // Save the contact to the database
+                    sharedPrefsProvider.savePreferences(Contact.PREF_KEY_PHONE, it.contactInfo.phone)
+                    sharedPrefsProvider.savePreferences(Contact.PREF_KEY_EMAIL, it.contactInfo.email)
+                    sharedPrefsProvider.savePreferences(Contact.PREF_KEY_TWITTER, it.contactInfo.twitter)
+
+
+                    // Convert the response into the list of pages to save in database.
                     // Mark the updated time to the current UNIX milliseconds.
                     val updateTime = System.currentTimeMillis()
-                    val homeCards = ArrayList<HomeCards>()
+                    val pages = ArrayList<Pages>()
 
-                    it.cards.map { it.toHomeCards() }
+                    it.pagesItem.map { it.toPage() }
                             .forEach {
                                 it.updateMills = updateTime
-                                homeCards.add(it)
+                                pages.add(it)
                             }
-                    return@map homeCards
-                }
-                .doOnNext {
-                    //Save to each card into database
-                    it.forEach {
 
-                        if (cardsDao.getCardFromId(it.id) == null) {
+                    //Save to each page into database
+                    pages.forEach {
 
-                            // There is no card for this id present into the db.
+                        if (pagesDao.getCardFromId(it.id) == null) {
+
+                            // There is no page for this id present into the db.
                             // Insert new raw.
-                            cardsDao.insert(it)
+                            pagesDao.insert(it)
                         } else {
 
-                            // Information for this card is already present.
+                            // Information for this page is already present.
                             // Update the card raw.
-                            cardsDao.update(it)
+                            pagesDao.update(it)
                         }
                     }
 
-                    // Delete all the old cards which where not returned from the server in the response.
-                    if (it.isNotEmpty()) {
-                        cardsDao.deleteNotUpdatedCards(it[0].updateMills)
+                    // Delete all the old pages which where not returned from the server in the response.
+                    if (pages.isNotEmpty()) {
+                        pagesDao.deleteNotUpdatedCards(pages[0].updateMills)
                     }
+                    return@map pages
                 }
     }
 
-    override fun getCards(): Observable<ArrayList<HomeCards>> {
-        return cardsDao.getCount()
-                .toObservable()
-                .flatMap {
+    /**
+     * Get the list of [Pages] to display in the view. This will load the cached data from the
+     * database and emits the new result every time there are any changes made to the database. If
+     * there are not any cached data into the database, this method will retrieve the data from the
+     * server and cache it to the database for future use.
+     *
+     * @return [Observable] of list of [Pages]. Once the subscriber subscribes to this [Observable],
+     * it will keep emitting whenever there are any changes into the data until the stream gets dispose.
+     */
+    override fun getPages(): Observable<ArrayList<Pages>> {
+        return pagesDao.getCount()
+                .map {
 
                     // Check the number of items in the database.
-                    return@flatMap if (it == 0) {
+                    if (it == 0) {
 
                         // If the number of items are 0, database is not synced before.
-                        // Make a network call to load the list of cards from the server
-                        refreshCards().flatMap {
+                        // Make a network call to load the list of pages from the server.
+                        refreshData().subscribe({
+                            // Do nothing
+                        }, {
+                            // Propagate the exception.
+                            // We are ending the stream.
+                            Exceptions.propagate(it)
+                        })
 
-                            // Once the network call completes start observing the database changes;
-                            cardsDao.getAllCards().toObservable()
-                        }
-                    } else {
-
-                        // There are previously synced card into the database.
-                        // Read all the cards from the database & start observing database changes.
-                        cardsDao.getAllCards().toObservable()
+                        return@map true
                     }
+                    return@map false
                 }
-                .map { it as ArrayList<HomeCards> } //Map list as array list. (Room doesn't support array list as output type)
+                .flatMapObservable {
+                    // Read all the pages from the database & start observing database changes.
+                    pagesDao.getAllCards().toObservable()
+                }
+                .map { it as ArrayList<Pages> } //Map list as array list. (Room doesn't support array list as output type)
     }
 
+    override fun getPage(pageId: Long): Observable<Pages> {
+        return pagesDao.hasPage(pageId)
+                .map {
+                    if (it <= 0) {
+
+                        // We don't have page for this id.
+                        // It's rare case. But we should be prepare!!!
+                        // Make a network call to load the list of pages from the server.
+                        refreshData()
+                    }
+                    return@map it
+                }
+                .flatMapObservable {
+                    pagesDao.observePage(pageId).toObservable()
+                }
+    }
 }

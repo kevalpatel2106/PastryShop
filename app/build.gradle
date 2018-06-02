@@ -44,6 +44,7 @@ dependencies {
     //Dagger dependencies
     implementation "com.google.dagger:dagger-android:${versions.daggerVersion}"
     implementation "com.google.dagger:dagger-android-support:${versions.daggerVersion}"
+    implementation 'com.android.support:support-v4:27.1.1'
     kapt "com.google.dagger:dagger-android-processor:${versions.daggerVersion}"
     kapt "com.google.dagger:dagger-compiler:${versions.daggerVersion}"
     compileOnly "javax.annotation:jsr250-api:1.0"

@@ -7,4 +7,5 @@
     <!--text colors-->
     <color name="colorPrimaryText">#FFFFFF</color>
     <color name="colorSecondaryText">#D0D1CD</color>
+    <color name="detailCloseButtonBg">#22111111</color>
 </resources>

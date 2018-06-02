@@ -13,14 +13,14 @@ import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.TypeConverters
-import com.kevalpatel2106.pastryshop.bin.HomeCards
+import com.kevalpatel2106.pastryshop.bin.Pages
 
 /**
  * Created by Keval on 01/06/18.
  *
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
-@Database(entities = [HomeCards::class], version = PSDatabase.DB_VERSION, exportSchema = true)
+@Database(entities = [Pages::class], version = PSDatabase.DB_VERSION, exportSchema = true)
 @TypeConverters(ImageListConverter::class)
 abstract class PSDatabase : RoomDatabase() {
 
@@ -53,5 +53,5 @@ abstract class PSDatabase : RoomDatabase() {
         }
     }
 
-    abstract fun cardsDao(): CardsDao
+    abstract fun cardsDao(): PagesDao
 }

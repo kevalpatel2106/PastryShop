@@ -11,10 +11,11 @@ package com.kevalpatel2106.pastryshop.repository
 import android.app.Application
 import com.kevalpatel2106.pastryshop.BuildConfig
 import com.kevalpatel2106.pastryshop.di.BaseDiModule
-import com.kevalpatel2106.pastryshop.repository.db.CardsDao
 import com.kevalpatel2106.pastryshop.repository.db.PSDatabase
+import com.kevalpatel2106.pastryshop.repository.db.PagesDao
 import com.kevalpatel2106.pastryshop.repository.network.Network
 import com.kevalpatel2106.pastryshop.utils.ApplicationScope
+import com.kevalpatel2106.pastryshop.utils.SharedPrefsProvider
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -48,8 +49,10 @@ class RepoDiModule {
 
     @Provides
     @ApplicationScope
-    internal fun provideNetwork(@Named(BASE_URL) baseUrl: String,
-                                @Named(ENABLE_LOG) enableLogging: Boolean): Network {
+    internal fun provideNetwork(
+            @Named(BASE_URL) baseUrl: String,
+            @Named(ENABLE_LOG) enableLogging: Boolean
+    ): Network {
         return Network(baseUrl, enableLogging)
     }
 
@@ -61,13 +64,17 @@ class RepoDiModule {
 
     @Provides
     @ApplicationScope
-    fun provideCardsDao(database: PSDatabase): CardsDao {
+    fun provideCardsDao(database: PSDatabase): PagesDao {
         return database.cardsDao()
     }
 
     @Provides
     @ApplicationScope
-    fun provideRepository(network: Network, cardsDao: CardsDao): Repository {
-        return RepositoryImpl(network, cardsDao)
+    fun provideRepository(
+            network: Network,
+            pagesDao: PagesDao,
+            sharedPrefsProvider: SharedPrefsProvider
+    ): Repository {
+        return RepositoryImpl(network, pagesDao, sharedPrefsProvider)
     }
 }

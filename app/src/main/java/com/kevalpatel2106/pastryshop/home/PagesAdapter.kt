@@ -10,14 +10,16 @@ package com.kevalpatel2106.pastryshop.home
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-import com.kevalpatel2106.pastryshop.bin.HomeCards
+import com.kevalpatel2106.pastryshop.bin.Pages
 
 /**
  * Created by Keval on 01/06/18.
  *
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
-class HomeCardsAdapter(private val cards: ArrayList<HomeCards>)
+internal class PagesAdapter(
+        private val cards: ArrayList<Pages>,
+        private val pageSelectionListener: PageSelectionListener)
     : RecyclerView.Adapter<HomeCardsViewHolder>() {
 
     internal var imageHeight = 0
@@ -27,12 +29,18 @@ class HomeCardsAdapter(private val cards: ArrayList<HomeCards>)
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeCardsViewHolder {
-        return HomeCardsViewHolder.create(parent)
+        return HomeCardsViewHolder.create(parent = parent)
     }
 
     override fun getItemCount(): Int = cards.size
 
     override fun onBindViewHolder(holder: HomeCardsViewHolder, position: Int) {
-        holder.bind(cards[position], imageHeight)
+        holder.bind(
+                page = cards[position],
+                imageHeight = imageHeight,
+                onClick = {
+                    pageSelectionListener.onPageSelected(it, holder.itemView)
+                }
+        )
     }
 }

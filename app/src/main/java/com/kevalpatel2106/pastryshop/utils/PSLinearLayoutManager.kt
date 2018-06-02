@@ -16,9 +16,9 @@ import android.support.v7.widget.LinearLayoutManager
  *
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
-class AppLinearLayoutManager(context: Context,
-                             orientation: Int = LinearLayoutManager.VERTICAL,
-                             reverseLayout: Boolean = false) : LinearLayoutManager(context, orientation, reverseLayout) {
+class PSLinearLayoutManager(context: Context,
+                            orientation: Int = LinearLayoutManager.VERTICAL,
+                            reverseLayout: Boolean = false) : LinearLayoutManager(context, orientation, reverseLayout) {
     var isScrollEnabled = true
 
     override fun canScrollVertically(): Boolean {

@@ -11,6 +11,7 @@ package com.kevalpatel2106.pastryshop.di
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.kevalpatel2106.pastryshop.home.HomeViewModel
+import com.kevalpatel2106.pastryshop.pageDetail.DetailViewModel
 import com.kevalpatel2106.pastryshop.utils.DaggerViewModelFactory
 import com.kevalpatel2106.pastryshop.utils.ViewModelKey
 import dagger.Binds
@@ -28,10 +29,14 @@ internal abstract class ViewModelFactoryModule {
     @Binds
     internal abstract fun bindViewModelFactory(factory: DaggerViewModelFactory): ViewModelProvider.Factory
 
-
     @Binds
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
     internal abstract fun bindHomeViewModel(viewModel: HomeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(DetailViewModel::class)
+    internal abstract fun bindDetailViewModel(viewModel: DetailViewModel): ViewModel
 }
 

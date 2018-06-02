@@ -9,18 +9,22 @@
 package com.kevalpatel2106.pastryshop.repository.network
 
 import com.google.gson.annotations.SerializedName
-import com.kevalpatel2106.pastryshop.bin.HomeCards
+import com.kevalpatel2106.pastryshop.bin.Contact
+import com.kevalpatel2106.pastryshop.bin.Pages
 
 data class GetDataResponse(
 
-        @field:SerializedName("cards")
-        val cards: ArrayList<CardsItem>,
+        @field:SerializedName("pages")
+        val pagesItem: ArrayList<PagesItem>,
+
+        @field:SerializedName("contact")
+        val contactInfo: ContactItem,
 
         @field:SerializedName("background")
         val background: String
 )
 
-data class CardsItem(
+data class PagesItem(
 
         @field:SerializedName("id")
         val id: Long,
@@ -35,7 +39,24 @@ data class CardsItem(
         val title: String
 ) {
 
-    fun toHomeCards(): HomeCards {
-        return HomeCards(id, title, description, image)
+    fun toPage(): Pages {
+        return Pages(id, title, description, image)
+    }
+}
+
+data class ContactItem(
+
+        @field:SerializedName("phone")
+        val phone: String,
+
+        @field:SerializedName("email")
+        val email: String,
+
+        @field:SerializedName("twitter")
+        val twitter: String
+) {
+
+    fun toContact(): Contact {
+        return Contact(phone, email, twitter)
     }
 }
