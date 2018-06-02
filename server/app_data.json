@@ -1,6 +1,6 @@
 {
   "background": "https://raw.githubusercontent.com/kevalpatel2106/PastryShop/master/server/images/image.jpg",
-  "cards": [
+  "pages": [
     {
       "id": 1,
       "title": "About",
@@ -31,5 +31,10 @@
         "https://raw.githubusercontent.com/kevalpatel2106/PastryShop/master/server/images/menu_card_image.jpg"
       ]
     }
-  ]
+  ],
+  "contact": {
+    "phone": "+91 8866 756632",
+    "email": "kevalpatel2106@gmail.com",
+    "twitter": "https://twitter.com/kevalpatel2106"
+  }
 }
