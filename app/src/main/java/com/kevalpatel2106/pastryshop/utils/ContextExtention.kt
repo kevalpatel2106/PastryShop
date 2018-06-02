@@ -13,7 +13,6 @@ import android.content.Intent
 import android.support.annotation.ColorRes
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
-import android.util.TypedValue
 
 /**
  * Created by Keval on 01/06/18.
@@ -21,10 +20,6 @@ import android.util.TypedValue
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
 fun Context.getColorCompat(@ColorRes color: Int) = ContextCompat.getColor(this, color)
-
-fun Context.toPx(dp: Int): Int = TypedValue
-        .applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), resources.displayMetrics)
-        .toInt()
 
 fun <T : AppCompatActivity> Context.prepareLaunchIntent(
         aClass: Class<T>,

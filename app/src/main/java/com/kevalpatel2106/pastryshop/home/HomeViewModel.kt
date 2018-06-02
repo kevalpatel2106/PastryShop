@@ -9,6 +9,10 @@
 package com.kevalpatel2106.pastryshop.home
 
 import android.arch.lifecycle.MutableLiveData
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.util.Log
 import com.kevalpatel2106.pastryshop.base.BaseViewModel
 import com.kevalpatel2106.pastryshop.bin.Pages
 import com.kevalpatel2106.pastryshop.repository.Repository
@@ -17,6 +21,7 @@ import com.kevalpatel2106.pastryshop.utils.recall
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
+
 
 /**
  * Created by Keval on 01/06/18.
@@ -28,6 +33,7 @@ import javax.inject.Inject
 internal class HomeViewModel @Inject constructor(
         private val repository: Repository
 ) : BaseViewModel() {
+    private val tag = "HomeViewModel"
 
     /**
      * [MutableLiveData] of [Pages] to display on the view. View can observe this to get notify
@@ -35,14 +41,14 @@ internal class HomeViewModel @Inject constructor(
      */
     internal val pages = MutableLiveData<ArrayList<Pages>>()
 
-    internal val isLoadingPages = MutableLiveData<Boolean>()
+    internal val isBlockUi = MutableLiveData<Boolean>()
 
     internal val errorLoadingPages = SingleLiveEvent<String>()
 
     init {
         // Initialize
         pages.value = ArrayList()
-        isLoadingPages.value = false
+        isBlockUi.value = false
 
         //Start loading the pages.
         loadPages()
@@ -56,9 +62,9 @@ internal class HomeViewModel @Inject constructor(
         val d = repository.getPages()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .doOnSubscribe { isLoadingPages.value = true }
-                .doOnError { isLoadingPages.value = false }
-                .doOnNext { isLoadingPages.value = false }
+                .doOnSubscribe { isBlockUi.value = true }
+                .doOnError { isBlockUi.value = true }
+                .doOnNext { isBlockUi.value = false }
                 .subscribe({
 
                     // Some changes occurred into the database
@@ -75,4 +81,16 @@ internal class HomeViewModel @Inject constructor(
         addDisposable(d)
     }
 
+    internal fun call(context: Context) {
+        repository.getContactInfo()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({
+                    val intent = Intent(Intent.ACTION_DIAL)
+                    intent.data = Uri.parse("tel:${it.phone}")
+                    context.startActivity(intent)
+                }, {
+                    Log.e(tag, it.message)
+                })
+    }
 }

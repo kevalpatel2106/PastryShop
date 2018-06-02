@@ -84,16 +84,22 @@ class HomeFragment : Fragment(), PageSelectionListener {
         model.errorLoadingPages.observe(this@HomeFragment, Observer {
             it?.let { showSnack(it) }
         })
-        model.isLoadingPages.observe(this@HomeFragment, Observer {
+        model.isBlockUi.observe(this@HomeFragment, Observer {
             it?.let {
                 // Disable collapsing toolbar behaviour if pages are still loading...
                 home_coordinate_layout.isAllowForScroll = !it
+
+                // Hide call FAB
+                if (it) phone_fab.hide() else phone_fab.show()
             }
         })
 
         setPagesList()
 
         manageScrollAnimations()
+
+        // Set FAB
+        phone_fab.setOnClickListener { context?.let { model.call(it) } }
     }
 
     private fun setPagesList() {

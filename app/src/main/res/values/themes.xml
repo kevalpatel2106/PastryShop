@@ -16,10 +16,22 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <!-- Base application theme. -->
+    <!-- Base application theme without actionbar . -->
     <style name="AppTheme.NoActionbar">
         <item name="windowActionBar">false</item>
-        <item name="android:windowTranslucentStatus">true</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- Main activity theme. -->
+    <style name="AppTheme.NoActionbar.Main">
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <!-- Splash activity theme. -->
+    <style name="AppTheme.NoActionbar.Splash">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowBackground">@color/colorPrimary</item>
     </style>
 </resources>

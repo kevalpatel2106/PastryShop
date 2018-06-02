@@ -62,7 +62,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 if (supportFragmentManager.findFragmentById(R.id.container) !is HomeFragment) {
                     supportFragmentManager.beginTransaction()
                             .replace(R.id.main_container, HomeFragment())
-                            .addToBackStack(null)   // Don't add into the back stack
                             .commit()
                     supportFragmentManager.executePendingTransactions()
                 }
@@ -90,8 +89,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            android.R.id.home -> {
+            android.R.id.home -> {  // Up button press
+
                 if (!main_drawer_layout.isDrawerOpen(Gravity.START)) {
+
                     //If the drawer is closed, open it.
                     main_drawer_layout.openDrawer(Gravity.START)
                 }

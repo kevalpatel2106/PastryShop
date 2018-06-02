@@ -8,6 +8,7 @@
 
 package com.kevalpatel2106.pastryshop.repository
 
+import com.kevalpatel2106.pastryshop.bin.Contact
 import com.kevalpatel2106.pastryshop.bin.Pages
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -22,6 +23,8 @@ interface Repository {
     fun getPages(): Observable<ArrayList<Pages>>
 
     fun getPage(pageId: Long): Observable<Pages>
+
+    fun getContactInfo(): Single<Contact>
 
     fun refreshData(): Single<ArrayList<Pages>>
 }

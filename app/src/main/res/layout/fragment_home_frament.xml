@@ -102,4 +102,27 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:listitem="@layout/item_dashboard_card"
         tools:orientation="horizontal" />
+
+    <!--Container for FAB-->
+    <!--Coordinate layout ignores margin while using anchors.-->
+    <!--See: https://stackoverflow.com/a/30692574/4690731-->
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/spacing_small"
+        app:layout_anchor="@id/home_pages_rv"
+        app:layout_anchorGravity="top|end">
+
+        <!--Call FAB-->
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/phone_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_anti"
+            android:layout_marginEnd="@dimen/spacing_small"
+            android:src="@drawable/ic_phone"
+            app:borderWidth="0dp"
+            app:fabSize="normal"
+            app:rippleColor="@android:color/darker_gray" />
+    </FrameLayout>
 </com.kevalpatel2106.pastryshop.base.PSCoordinatorLayout>

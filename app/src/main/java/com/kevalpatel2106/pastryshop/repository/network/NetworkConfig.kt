@@ -30,4 +30,7 @@ object NetworkConfig {
      * Network connection timeout in minutes.
      */
     internal const val CONNECTION_TIMEOUT = 1L
+
+
+    internal const val INTERNET_NOT_AVAILABLE_BROADCAST = "com.kevalpatel2106.pastryshop.internet_unavailable"
 }

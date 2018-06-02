@@ -16,7 +16,6 @@ import com.kevalpatel2106.pastryshop.repository.network.Network
 import com.kevalpatel2106.pastryshop.utils.SharedPrefsProvider
 import io.reactivex.Observable
 import io.reactivex.Single
-import io.reactivex.exceptions.Exceptions
 
 /**
  * Created by Keval on 01/06/18.
@@ -89,28 +88,25 @@ internal class RepositoryImpl(private val network: Network,
      */
     override fun getPages(): Observable<ArrayList<Pages>> {
         return pagesDao.getCount()
-                .map {
-
+                .flatMapObservable {
                     // Check the number of items in the database.
                     if (it == 0) {
 
                         // If the number of items are 0, database is not synced before.
                         // Make a network call to load the list of pages from the server.
-                        refreshData().subscribe({
-                            // Do nothing
-                        }, {
-                            // Propagate the exception.
-                            // We are ending the stream.
-                            Exceptions.propagate(it)
-                        })
+                        return@flatMapObservable refreshData().toObservable()
+                                .flatMap {
 
-                        return@map true
+                                    // Once the data synced successfully,
+                                    // read all the pages from the database & start observing
+                                    // database changes.
+                                    pagesDao.getAllCards().toObservable()
+                                }
                     }
-                    return@map false
-                }
-                .flatMapObservable {
+
+                    // There are cached items into the database.
                     // Read all the pages from the database & start observing database changes.
-                    pagesDao.getAllCards().toObservable()
+                    return@flatMapObservable pagesDao.getAllCards().toObservable()
                 }
                 .map { it as ArrayList<Pages> } //Map list as array list. (Room doesn't support array list as output type)
     }
@@ -130,5 +126,24 @@ internal class RepositoryImpl(private val network: Network,
                 .flatMapObservable {
                     pagesDao.observePage(pageId).toObservable()
                 }
+    }
+
+    override fun getContactInfo(): Single<Contact> {
+        return Single.create {
+            val phone = sharedPrefsProvider.getStringFromPreferences(Contact.PREF_KEY_PHONE, null)
+            val email = sharedPrefsProvider.getStringFromPreferences(Contact.PREF_KEY_EMAIL, null)
+            val twitter = sharedPrefsProvider.getStringFromPreferences(Contact.PREF_KEY_TWITTER, null)
+
+
+            if (phone == null || email == null || twitter == null) {
+                it.onError(Throwable("No contact information available."))
+            } else {
+                it.onSuccess(Contact(
+                        phone = phone,
+                        email = email,
+                        twitter = twitter
+                ))
+            }
+        }
     }
 }
