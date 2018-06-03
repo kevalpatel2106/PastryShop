@@ -14,6 +14,7 @@ import android.util.Log
 import com.kevalpatel2106.pastryshop.di.DaggerAppDiComponent
 import com.kevalpatel2106.pastryshop.main.MainActivity
 import com.kevalpatel2106.pastryshop.repository.Repository
+import com.kevalpatel2106.pastryshop.utils.BaseApplication
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -27,7 +28,7 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         DaggerAppDiComponent.builder()
-                .baseComponent(PSApplication.getBaseComponent(this@SplashActivity))
+                .rootComponent(BaseApplication.getRootComponent(this@SplashActivity))
                 .build()
                 .inject(this@SplashActivity)
 

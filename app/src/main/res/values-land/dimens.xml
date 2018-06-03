@@ -1,0 +1,16 @@
+<!--
+  ~ Copyright (c) 2018. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  ~ Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+  ~ Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+  ~ Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+  ~ Vestibulum commodo. Ut rhoncus gravida arcu.
+  -->
+
+<resources>
+    <dimen name="home_cards_image_max_height">180dp</dimen>
+    <dimen name="home_card_width">200dp</dimen>
+    <dimen name="detail_image_flipper_height">200dp</dimen>
+    <dimen name="home_toolbar_height">120dp</dimen>
+
+    <dimen name="details_card_width">@dimen/match_parent</dimen>
+</resources>

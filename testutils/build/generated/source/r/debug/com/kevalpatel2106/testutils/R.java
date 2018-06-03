@@ -732,23 +732,20 @@ public final class R {
         public static int abc_search_view = 0x7f0f0019;
         public static int abc_select_dialog_material = 0x7f0f001a;
         public static int abc_tooltip = 0x7f0f001b;
-        public static int activity_test = 0x7f0f001c;
-        public static int fragment_test = 0x7f0f001d;
-        public static int notification_action = 0x7f0f001e;
-        public static int notification_action_tombstone = 0x7f0f001f;
-        public static int notification_template_custom_big = 0x7f0f0020;
-        public static int notification_template_icon_group = 0x7f0f0021;
-        public static int notification_template_part_chronometer = 0x7f0f0022;
-        public static int notification_template_part_time = 0x7f0f0023;
-        public static int select_dialog_item_material = 0x7f0f0024;
-        public static int select_dialog_multichoice_material = 0x7f0f0025;
-        public static int select_dialog_singlechoice_material = 0x7f0f0026;
-        public static int support_simple_spinner_dropdown_item = 0x7f0f0027;
+        public static int fragment_test = 0x7f0f001c;
+        public static int notification_action = 0x7f0f001d;
+        public static int notification_action_tombstone = 0x7f0f001e;
+        public static int notification_template_custom_big = 0x7f0f001f;
+        public static int notification_template_icon_group = 0x7f0f0020;
+        public static int notification_template_part_chronometer = 0x7f0f0021;
+        public static int notification_template_part_time = 0x7f0f0022;
+        public static int select_dialog_item_material = 0x7f0f0023;
+        public static int select_dialog_multichoice_material = 0x7f0f0024;
+        public static int select_dialog_singlechoice_material = 0x7f0f0025;
+        public static int support_simple_spinner_dropdown_item = 0x7f0f0026;
     }
     public static final class raw {
-        public static int empty_sample = 0x7f140001;
-        public static int success_sample = 0x7f140002;
-        public static int success_sample_without_data = 0x7f140003;
+        public static int app_data = 0x7f140001;
     }
     public static final class string {
         public static int abc_action_bar_home_description = 0x7f150001;

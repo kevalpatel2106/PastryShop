@@ -24,13 +24,13 @@ import javax.inject.Inject
  */
 class DetailViewModel @Inject constructor(private val repository: Repository) : BaseViewModel() {
 
-    val name = MutableLiveData<String>()
+    internal val name = MutableLiveData<String>()
 
-    val description = MutableLiveData<String>()
+    internal val description = MutableLiveData<String>()
 
-    val image = MutableLiveData<ArrayList<String>>()
+    internal val image = MutableLiveData<ArrayList<String>>()
 
-    val errorLoadingPage = SingleLiveEvent<String>()
+    internal val errorLoadingPage = SingleLiveEvent<String>()
 
     init {
         // Initialize

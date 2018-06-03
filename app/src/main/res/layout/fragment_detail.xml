@@ -12,16 +12,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/darker_gray"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:paddingTop="@dimen/statusbar_height">
 
     <android.support.v7.widget.CardView
         android:id="@+id/details_card"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/details_card_width"
         android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
         android:layout_marginBottom="@dimen/md_activity_vertical_margin"
         android:layout_marginEnd="@dimen/md_activity_horizontal_margin"
         android:layout_marginStart="@dimen/md_activity_horizontal_margin"
-        android:layout_marginTop="@dimen/detail_card_margin_top"
+        android:layout_marginTop="@dimen/spacing_small"
         app:cardBackgroundColor="@android:color/white"
         app:cardCornerRadius="@dimen/spacing_micro"
         app:cardElevation="@dimen/spacing_micro">
@@ -36,12 +38,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <android.support.v7.widget.AppCompatImageView
+                <android.support.v4.view.ViewPager
                     android:id="@+id/detail_images_flipper"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/detail_image_flipper_height"
-                    android:scaleType="centerCrop"
-                    tools:src="@tools:sample/avatars" />
+                    android:layout_alignWithParentIfMissing="true" />
+
+                <me.relex.circleindicator.CircleIndicator
+                    android:id="@+id/detail_images_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/spacing_large"
+                    android:layout_marginBottom="@dimen/spacing_micro"
+                    app:ci_drawable="@drawable/indicator_selected"
+                    app:ci_drawable_unselected="@drawable/indicator_unselected"
+                    app:layout_constraintBottom_toBottomOf="@id/detail_images_flipper"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/detail_close_btn"

@@ -1,0 +1,40 @@
+{
+  "background": "https://raw.githubusercontent.com/kevalpatel2106/PastryShop/master/server/images/image.jpg",
+  "pages": [
+    {
+      "id": 1,
+      "title": "About",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus erat a lorem tempor, et maximus tellus elementum. Nunc fermentum purus ac nibh congue feugiat. Duis vel scelerisque risus, ornare dictum urna. Duis tincidunt iaculis luctus. Etiam dignissim iaculis eros, ac rutrum quam cursus vitae. Nulla lacus lorem, molestie laoreet cursus ac, maximus ut mi. Nulla mi ante, hendrerit ut sollicitudin in, laoreet at elit. Etiam convallis, ex in tempor feugiat, neque risus eleifend orci, in rhoncus dui ex sed felis.",
+      "image": [
+        "https://raw.githubusercontent.com/kevalpatel2106/PastryShop/master/server/images/about_card_image.jpg",
+        "https://raw.githubusercontent.com/kevalpatel2106/PastryShop/master/server/images/menu_card_image.jpg",
+        "https://raw.githubusercontent.com/kevalpatel2106/PastryShop/master/server/images/credits_card_image.jpg"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Menu",
+      "description": "In condimentum felis ut diam semper faucibus. Aliquam ornare finibus arcu, in vulputate nibh scelerisque sit amet. Vestibulum sed lectus sit amet dui faucibus fermentum. Curabitur a justo viverra, maximus erat id, facilisis eros. Morbi porta vulputate semper. Nullam maximus turpis vel leo tempor, quis gravida enim dictum. Nullam vehicula metus tristique risus auctor dignissim.",
+      "image": [
+        "https://raw.githubusercontent.com/kevalpatel2106/PastryShop/master/server/images/menu_card_image.jpg",
+        "https://raw.githubusercontent.com/kevalpatel2106/PastryShop/master/server/images/about_card_image.jpg",
+        "https://raw.githubusercontent.com/kevalpatel2106/PastryShop/master/server/images/credits_card_image.jpg"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Credits",
+      "description": "Proin volutpat viverra quam, sit amet hendrerit lorem. Nunc varius magna vel eros bibendum pretium. Suspendisse lacus felis, bibendum blandit interdum et, commodo eu arcu. Duis eu condimentum lorem. Integer pulvinar rutrum neque. Aliquam aliquam volutpat purus eget vulputate. Morbi interdum leo ac lacus venenatis, nec iaculis ex gravida. Cras faucibus faucibus diam, in pulvinar justo. Ut ex massa, vestibulum sed pretium at, aliquet sed nisi. Phasellus at arcu justo. Ut tellus nisi, sodales a elit ut, auctor laoreet ligula. Morbi aliquam eu ante ac efficitur. Nunc finibus neque quis nibh convallis tristique. Vivamus lobortis dignissim enim, in euismod lorem dignissim a.",
+      "image": [
+        "https://raw.githubusercontent.com/kevalpatel2106/PastryShop/master/server/images/credits_card_image.jpg",
+        "https://raw.githubusercontent.com/kevalpatel2106/PastryShop/master/server/images/about_card_image.jpg",
+        "https://raw.githubusercontent.com/kevalpatel2106/PastryShop/master/server/images/menu_card_image.jpg"
+      ]
+    }
+  ],
+  "contact": {
+    "phone": "+91 8866 756632",
+    "email": "kevalpatel2106@gmail.com",
+    "twitter": "https://twitter.com/kevalpatel2106"
+  }
+}

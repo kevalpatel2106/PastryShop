@@ -9,4 +9,5 @@
 <transitionSet>
     <changeTransform />
     <changeBounds />
+    <changeImageTransform />
 </transitionSet>

@@ -8,9 +8,7 @@
 
 package com.kevalpatel2106.pastryshop.repository.db
 
-import android.app.Application
 import android.arch.persistence.room.Database
-import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.arch.persistence.room.TypeConverters
 import com.kevalpatel2106.pastryshop.bin.Pages
@@ -29,28 +27,12 @@ abstract class PSDatabase : RoomDatabase() {
         /**
          * Database name.
          */
-        private const val DB_NAME = "ps_db"
+        const val DB_NAME = "ps_db"
 
         /**
          * Database version.
          */
         const val DB_VERSION = 1
-
-        /**
-         * Sole instance of the database
-         */
-        private var sINSTANCE: PSDatabase? = null
-
-        /**
-         * Get the singleton instance of the [PSDatabase].
-         */
-        fun getAppDatabase(application: Application): PSDatabase {
-            if (sINSTANCE == null) {
-                sINSTANCE = Room.databaseBuilder(application, PSDatabase::class.java, DB_NAME)
-                        .build()
-            }
-            return sINSTANCE!!
-        }
     }
 
     abstract fun cardsDao(): PagesDao

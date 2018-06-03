@@ -13,6 +13,8 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.CoordinatorLayout
 import android.support.transition.TransitionInflater
@@ -25,11 +27,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
-import com.kevalpatel2106.pastryshop.PSApplication
 import com.kevalpatel2106.pastryshop.R
 import com.kevalpatel2106.pastryshop.bin.Pages
 import com.kevalpatel2106.pastryshop.di.DaggerAppDiComponent
 import com.kevalpatel2106.pastryshop.pageDetail.DetailFragment
+import com.kevalpatel2106.pastryshop.utils.BaseApplication
 import com.kevalpatel2106.pastryshop.utils.PSLinearLayoutManager
 import com.kevalpatel2106.pastryshop.utils.showSnack
 import kotlinx.android.synthetic.main.fragment_home_frament.*
@@ -54,7 +56,7 @@ class HomeFragment : Fragment(), PageSelectionListener {
         super.onAttach(context)
 
         DaggerAppDiComponent.builder()
-                .baseComponent(PSApplication.getBaseComponent(context!!))
+                .rootComponent(BaseApplication.getRootComponent(context!!))
                 .build()
                 .inject(this@HomeFragment)
         model = ViewModelProviders
@@ -86,13 +88,10 @@ class HomeFragment : Fragment(), PageSelectionListener {
         model.errorLoadingPages.observe(this@HomeFragment, Observer {
             it?.let { showSnack(it) }
         })
-        model.errorLoadingContact.observe(this@HomeFragment, Observer {
-            it?.let { showSnack(it) }
-        })
         model.isBlockUi.observe(this@HomeFragment, Observer {
             it?.let {
                 // Disable collapsing toolbar behaviour if pages are still loading...
-                home_coordinate_layout.isAllowForScroll = !it
+                home_coordinate_layout.allowTouchEvents = !it
 
                 // Hide call FAB
                 if (it) phone_fab.hide() else phone_fab.show()
@@ -100,11 +99,33 @@ class HomeFragment : Fragment(), PageSelectionListener {
         })
 
         setPagesList()
-
         manageScrollAnimations()
 
         // Set FAB
-        phone_fab.setOnClickListener { context?.let { model.callRestaurant(it) } }
+        phone_fab.setOnClickListener {
+
+            context?.let {
+                if (model.phoneNumber.isNullOrBlank()) {
+                    showSnack(getString(R.string.error_no_contact_information_available))
+                    return@setOnClickListener
+                }
+
+                val intent = Intent(Intent.ACTION_DIAL).apply {
+                    data = Uri.parse("tel:${model.phoneNumber}")
+                }
+
+                // Check if the dialer app available?
+                if (intent.resolveActivity(it.packageManager) != null) {
+
+                    // Open dialer
+                    it.startActivity(intent)
+                } else {
+
+                    // There is no application to make calls.
+                    showSnack(getString(R.string.error_dialar_application))
+                }
+            }
+        }
     }
 
     private fun setPagesList() {

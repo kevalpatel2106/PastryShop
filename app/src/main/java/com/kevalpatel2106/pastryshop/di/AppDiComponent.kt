@@ -21,7 +21,10 @@ import dagger.Component
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
 @ApplicationScope
-@Component(dependencies = [BaseComponent::class], modules = [ViewModelFactoryModule::class, RepoDiModule::class])
+@Component(
+        dependencies = [RootComponent::class],
+        modules = [ViewModelFactoryModule::class, RepoDiModule::class]
+)
 interface AppDiComponent {
 
     fun inject(homeFragment: HomeFragment)

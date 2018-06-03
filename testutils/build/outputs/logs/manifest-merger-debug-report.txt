@@ -1,8 +1,8 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/kevalpatel/Documents/Android/PastryShop/testutils/src/main/AndroidManifest.xml:15:1-30:12
-INJECTED from /Users/kevalpatel/Documents/Android/PastryShop/testutils/src/main/AndroidManifest.xml:15:1-30:12
-INJECTED from /Users/kevalpatel/Documents/Android/PastryShop/testutils/src/main/AndroidManifest.xml:15:1-30:12
+ADDED from /Users/kevalpatel/Documents/Android/PastryShop/testutils/src/main/AndroidManifest.xml:15:1-20:12
+INJECTED from /Users/kevalpatel/Documents/Android/PastryShop/testutils/src/main/AndroidManifest.xml:15:1-20:12
+INJECTED from /Users/kevalpatel/Documents/Android/PastryShop/testutils/src/main/AndroidManifest.xml:15:1-20:12
 	package
 		ADDED from /Users/kevalpatel/Documents/Android/PastryShop/testutils/src/main/AndroidManifest.xml:16:5-43
 		INJECTED from /Users/kevalpatel/Documents/Android/PastryShop/testutils/src/main/AndroidManifest.xml
@@ -17,20 +17,6 @@ uses-permission#android.permission.WAKE_LOCK
 ADDED from /Users/kevalpatel/Documents/Android/PastryShop/testutils/src/main/AndroidManifest.xml:19:5-68
 	android:name
 		ADDED from /Users/kevalpatel/Documents/Android/PastryShop/testutils/src/main/AndroidManifest.xml:19:22-65
-application
-ADDED from /Users/kevalpatel/Documents/Android/PastryShop/testutils/src/main/AndroidManifest.xml:21:5-29:19
-activity#com.kevalpatel2106.testutils.FragmentRuleActivity
-ADDED from /Users/kevalpatel/Documents/Android/PastryShop/testutils/src/main/AndroidManifest.xml:22:9-24:66
-	android:theme
-		ADDED from /Users/kevalpatel/Documents/Android/PastryShop/testutils/src/main/AndroidManifest.xml:24:13-63
-	android:name
-		ADDED from /Users/kevalpatel/Documents/Android/PastryShop/testutils/src/main/AndroidManifest.xml:23:13-49
-activity#com.kevalpatel2106.testutils.TestActivity
-ADDED from /Users/kevalpatel/Documents/Android/PastryShop/testutils/src/main/AndroidManifest.xml:26:9-28:54
-	android:theme
-		ADDED from /Users/kevalpatel/Documents/Android/PastryShop/testutils/src/main/AndroidManifest.xml:28:13-51
-	android:name
-		ADDED from /Users/kevalpatel/Documents/Android/PastryShop/testutils/src/main/AndroidManifest.xml:27:13-41
 uses-sdk
 INJECTED from /Users/kevalpatel/Documents/Android/PastryShop/testutils/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/kevalpatel/Documents/Android/PastryShop/testutils/src/main/AndroidManifest.xml

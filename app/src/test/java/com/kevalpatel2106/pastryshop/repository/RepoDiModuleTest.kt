@@ -9,6 +9,8 @@
 package com.kevalpatel2106.pastryshop.repository
 
 import com.kevalpatel2106.pastryshop.BuildConfig
+import okhttp3.logging.HttpLoggingInterceptor
+import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,12 +25,22 @@ import org.junit.runners.JUnit4
 class RepoDiModuleTest {
 
     @Test
-    fun checkBaseUrl() {
-        assertEquals(BuildConfig.BASE_URL, RepoDiModule().provideBaseUrl())
+    fun checkEnableLogging() {
+        assertEquals(BuildConfig.BUILD_TYPE == "debug", RepoDiModule().provideIsEnableLogging())
     }
 
     @Test
-    fun checkEnableLogging() {
-        assertEquals(BuildConfig.BUILD_TYPE == "debug", RepoDiModule().provideIsEnableLogging())
+    fun checkProvideNetwork() {
+        val testBaseUrl = "http://example.com/"
+        val network = RepoDiModule().provideNetwork(testBaseUrl, true)
+
+        // Validate the base url
+        assertEquals(testBaseUrl, network.getRetrofitClient().baseUrl().toString())
+
+        // Validate the logging flag
+        val interceptors = network.okHttpClient.interceptors()
+        Assert.assertEquals(1, interceptors.size)
+        Assert.assertTrue(interceptors[0] is HttpLoggingInterceptor)
+        Assert.assertEquals(HttpLoggingInterceptor.Level.BODY, (interceptors[0] as HttpLoggingInterceptor).level)
     }
 }

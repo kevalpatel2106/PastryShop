@@ -17,4 +17,82 @@ ext {
             'daggerVersion' : "2.15",
             'room'          : "1.1.1-rc1",
     ]
+
+    packageExcludes = {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/rxjava.properties'
+        exclude 'protobuf.meta'
+    }
+
+    lintOption = {
+        abortOnError true
+        htmlReport true
+        xmlReport true
+        textReport true
+        disable 'InvalidPackage'
+        checkTestSources true
+        ignoreWarnings true
+        disable 'GradleCompatible'
+    }
+
+    compileOption = {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dokkaConfig = {
+        outputFormat = 'javadoc'
+        outputDirectory = "${project.rootDir}/docs"
+        jdkVersion = 8 // Used for linking to JDK
+        includeNonPublic = false
+        skipDeprecated = false
+        skipEmptyPackages = true
+    }
+
+    testOption = {
+        animationsDisabled = true
+        unitTests.all {
+            includeAndroidResources = true
+
+            maxParallelForks 4
+
+            minHeapSize = "1024m"
+            maxHeapSize = "1596m"
+
+            testLogging {
+                events 'passed', 'skipped', 'failed'
+            }
+        }
+    }
+
+    jacocoAndroidUnitTestReportConfig = {
+        csv.enabled true
+        html.enabled true
+        xml.enabled false
+    }
+
+    kotlinOption = {
+        freeCompilerArgs = ['-Xno-param-assertions']
+        allWarningsAsErrors = true
+        jvmTarget = "1.8"
+    }
+
+    aaptOption = {
+        cruncherProcesses 2
+    }
+
+    adbOption = {
+        timeOutInMs 10_000
+    }
+
+    dexOption = {
+        javaMaxHeapSize = "1024"
+        maxProcessCount = 4
+        threadCount = 4
+        preDexLibraries = true
+    }
 }

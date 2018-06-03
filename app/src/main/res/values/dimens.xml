@@ -24,7 +24,9 @@
     <dimen name="home_card_margin">@dimen/spacing_micro</dimen>
     <dimen name="home_card_elevation">4dp</dimen>
     <dimen name="home_card_corner_radius">2dp</dimen>
-    <dimen name="detail_image_flipper_height">200dp</dimen>
+    <dimen name="detail_image_flipper_height">250dp</dimen>
     <dimen name="detail_description_text_size">16sp</dimen>
-    <dimen name="detail_card_margin_top">40dp</dimen>
+    <dimen name="home_toolbar_height">160dp</dimen>
+
+    <dimen name="details_card_width">@dimen/match_parent</dimen>
 </resources>

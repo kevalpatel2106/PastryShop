@@ -8,13 +8,12 @@
 
 package com.kevalpatel2106.pastryshop.repository
 
-import android.app.Application
 import com.kevalpatel2106.pastryshop.BuildConfig
-import com.kevalpatel2106.pastryshop.di.BaseDiModule
 import com.kevalpatel2106.pastryshop.repository.db.PSDatabase
 import com.kevalpatel2106.pastryshop.repository.db.PagesDao
 import com.kevalpatel2106.pastryshop.repository.network.Network
 import com.kevalpatel2106.pastryshop.utils.ApplicationScope
+import com.kevalpatel2106.pastryshop.utils.BaseApplication
 import com.kevalpatel2106.pastryshop.utils.SharedPrefsProvider
 import dagger.Module
 import dagger.Provides
@@ -26,7 +25,7 @@ import javax.inject.Named
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
 @Module
-class RepoDiModule {
+internal class RepoDiModule {
 
     companion object {
         const val BASE_URL = "base_url"
@@ -35,14 +34,7 @@ class RepoDiModule {
 
     @Provides
     @ApplicationScope
-    @Named(BaseDiModule.BASE_URL)
-    internal fun provideBaseUrl(): String {
-        return BuildConfig.BASE_URL
-    }
-
-    @Provides
-    @ApplicationScope
-    @Named(BaseDiModule.ENABLE_LOG)
+    @Named(ENABLE_LOG)
     internal fun provideIsEnableLogging(): Boolean {
         return BuildConfig.BUILD_TYPE.contains("debug", true)
     }
@@ -54,12 +46,6 @@ class RepoDiModule {
             @Named(ENABLE_LOG) enableLogging: Boolean
     ): Network {
         return Network(baseUrl, enableLogging)
-    }
-
-    @Provides
-    @ApplicationScope
-    fun provideDatabase(application: Application): PSDatabase {
-        return PSDatabase.getAppDatabase(application)
     }
 
     @Provides
@@ -76,5 +62,18 @@ class RepoDiModule {
             sharedPrefsProvider: SharedPrefsProvider
     ): Repository {
         return RepositoryImpl(network, pagesDao, sharedPrefsProvider)
+    }
+
+    @Provides
+    @ApplicationScope
+    fun provideDatabase(application: BaseApplication): PSDatabase {
+        return application.getDb()
+    }
+
+    @Provides
+    @ApplicationScope
+    @Named(RepoDiModule.BASE_URL)
+    internal fun provideBaseUrl(application: BaseApplication): String {
+        return application.getBaseUrl()
     }
 }

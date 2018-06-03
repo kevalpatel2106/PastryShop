@@ -25,7 +25,7 @@ import java.nio.file.Paths
  */
 class MockServerManager : Closeable {
 
-    lateinit var mockWebServer: MockWebServer
+    private lateinit var mockWebServer: MockWebServer
 
     @SuppressLint("NewApi")
     fun getResponsesPath(): String {

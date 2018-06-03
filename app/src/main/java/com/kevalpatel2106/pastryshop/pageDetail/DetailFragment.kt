@@ -20,9 +20,9 @@ import android.support.v4.view.ViewCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.kevalpatel2106.pastryshop.PSApplication
 import com.kevalpatel2106.pastryshop.R
 import com.kevalpatel2106.pastryshop.di.DaggerAppDiComponent
+import com.kevalpatel2106.pastryshop.utils.BaseApplication
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_detail.*
 import kotlinx.android.synthetic.main.fragment_detail.view.*
@@ -45,7 +45,7 @@ class DetailFragment : Fragment() {
         super.onAttach(context)
 
         DaggerAppDiComponent.builder()
-                .baseComponent(PSApplication.getBaseComponent(context!!))
+                .rootComponent(BaseApplication.getRootComponent(context!!))
                 .build()
                 .inject(this@DetailFragment)
         model = ViewModelProviders
@@ -69,6 +69,8 @@ class DetailFragment : Fragment() {
                 "${getString(R.string.transition_name_home_card_image)}_$pageId")
         ViewCompat.setTransitionName(rootView.details_card,
                 "${getString(R.string.transition_name_home_card_view)}_$pageId")
+        ViewCompat.setTransitionName(rootView.detail_close_btn,
+                "${getString(R.string.transition_name_close_button)}_$pageId")
 
         return rootView
     }
@@ -77,31 +79,35 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         model.name.observe(this@DetailFragment, Observer {
-            it?.let {
-                detail_title_tv.text = it
-            }
+            it?.let { detail_title_tv.text = it }
         })
         model.description.observe(this@DetailFragment, Observer {
-            it?.let {
-                detail_description_tv.text = it
-            }
+            it?.let { detail_description_tv.text = it }
         })
+
+        // Set images
+        val adapter = ImagePagerAdapter(context!!, model.image.value!!)
+        detail_images_flipper.adapter = adapter
+
         model.image.observe(this@DetailFragment, Observer {
             it?.let {
                 if (it.isEmpty()) return@let
 
+                // Update the image slider
+                adapter.notifyDataSetChanged()
+
+                // Update the bottom image
                 Picasso.get()
                         .load(it[0])
                         .noFade()
-                        .fit()
-                        .centerCrop()
-                        .into(detail_images_flipper)
-                Picasso.get()
-                        .load(it[0])
-                        .noFade()
+                        .placeholder(R.drawable.ic_placeholder)
                         .into(detail_second_image_iv)
             }
         })
+
+        // Set indicators
+        detail_images_indicator.setViewPager(detail_images_flipper)
+        adapter.registerDataSetObserver(detail_images_indicator.dataSetObserver)
 
         // Close button
         detail_close_btn.setOnClickListener { activity?.supportFragmentManager?.popBackStack() }

@@ -9,6 +9,7 @@
 <resources>
 
     <string name="application_name" translatable="false">Pastry Shop</string>
+    <string name="transition_name_close_button" translatable="false">close_btn</string>
     <string name="transition_name_home_card_view" translatable="false">card</string>
     <string name="transition_name_home_card_title" translatable="false">main</string>
     <string name="transition_name_home_card_description" translatable="false">descr</string>

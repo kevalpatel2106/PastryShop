@@ -22,13 +22,4 @@
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-    <application>
-        <activity
-            android:name="com.kevalpatel2106.testutils.FragmentRuleActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
-            android:name="com.kevalpatel2106.testutils.TestActivity"
-            android:theme="@style/Theme.AppCompat" />
-    </application>
-
 </manifest>

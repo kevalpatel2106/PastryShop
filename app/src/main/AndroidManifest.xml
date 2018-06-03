@@ -37,6 +37,11 @@
             android:resizeableActivity="true"
             android:theme="@style/AppTheme.NoActionbar.Main"
             tools:targetApi="n" />
+
+        <!--Test activity-->
+        <activity
+            android:name=".FragmentRuleActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
     </application>
 
 </manifest>

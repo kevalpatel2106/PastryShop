@@ -35,6 +35,10 @@ data class Pages(
 
     @ColumnInfo(name = PAGE_UPDATE_TIME)
     var updateMills: Long = 0
+        set(value) {
+            if (value <= 0) throw IllegalArgumentException("Invalid update time.")
+            field = value
+        }
 
     companion object {
         const val PAGES_TABLE = "pages_table"

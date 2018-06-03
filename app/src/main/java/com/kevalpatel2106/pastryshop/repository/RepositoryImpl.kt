@@ -116,18 +116,25 @@ internal class RepositoryImpl(private val network: Network,
 
     override fun getPage(pageId: Long): Observable<Pages> {
         return pagesDao.hasPage(pageId)
-                .map {
-                    if (it <= 0) {
-
-                        // We don't have page for this id.
-                        // It's rare case. But we should be prepare!!!
-                        // Make a network call to load the list of pages from the server.
-                        refreshData()
-                    }
-                    return@map it
-                }
                 .flatMapObservable {
-                    pagesDao.observePage(pageId).toObservable()
+                    // Check the number of items in the database.
+                    if (it == 0) {
+
+                        // If the number of items are 0, database is not synced before.
+                        // Make a network call to load the list of pages from the server.
+                        return@flatMapObservable refreshData().toObservable()
+                                .flatMap {
+
+                                    // Once the data synced successfully,
+                                    // read all the pages from the database & start observing
+                                    // database changes.
+                                    pagesDao.observePage(pageId).toObservable()
+                                }
+                    }
+
+                    // There are cached items into the database.
+                    // Read all the pages from the database & start observing database changes.
+                    return@flatMapObservable pagesDao.observePage(pageId).toObservable()
                 }
     }
 

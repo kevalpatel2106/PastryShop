@@ -91,7 +91,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return when (item.itemId) {
             android.R.id.home -> {  // Up button press
 
-                if (!main_drawer_layout.isDrawerOpen(Gravity.START)) {
+                if (main_drawer_layout.isDrawerOpen(Gravity.START)) {
+                    main_drawer_layout.closeDrawer(Gravity.START)
+                } else {
 
                     //If the drawer is closed, open it.
                     main_drawer_layout.openDrawer(Gravity.START)

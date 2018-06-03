@@ -16,10 +16,15 @@
     app:cardCornerRadius="@dimen/home_card_corner_radius"
     app:cardElevation="@dimen/home_card_elevation">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/detail_close_btn_stub"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/card_iv"
@@ -30,25 +35,30 @@
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/card_title_tv"
+            style="@style/PageTitleText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_small"
+            android:layout_below="@id/card_iv"
+            android:layout_marginEnd="@dimen/spacing_small"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_small"
             app:fontFamily="@font/noto_sans"
-            style="@style/PageTitleText"
             tools:text="@tools:sample/full_names" />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/card_description_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/card_title_tv"
             android:layout_marginBottom="@dimen/spacing_small"
             android:layout_marginEnd="@dimen/spacing_small"
             android:layout_marginStart="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_small"
             android:ellipsize="end"
-            android:maxLines="@integer/home_cards_description_max_line"
             android:lines="@integer/home_cards_description_max_line"
+            android:maxLines="@integer/home_cards_description_max_line"
             android:textAppearance="@style/SmallText.Secondary"
             app:fontFamily="@font/noto_sans"
             tools:text="@tools:sample/lorem/random" />
-    </LinearLayout>
+    </RelativeLayout>
 </android.support.v7.widget.CardView>

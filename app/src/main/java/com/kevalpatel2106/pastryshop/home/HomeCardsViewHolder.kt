@@ -61,6 +61,8 @@ class HomeCardsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
                     "${getString(R.string.transition_name_home_card_image)}_${page.id}")
             ViewCompat.setTransitionName(itemView.card,
                     "${getString(R.string.transition_name_home_card_view)}_${page.id}")
+            ViewCompat.setTransitionName(itemView.detail_close_btn_stub,
+                    "${getString(R.string.transition_name_close_button)}_${page.id}")
         }
     }
 }

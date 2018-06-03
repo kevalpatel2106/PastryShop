@@ -12,7 +12,6 @@ import android.content.Context
 import android.support.design.widget.CoordinatorLayout
 import android.util.AttributeSet
 import android.view.MotionEvent
-import android.view.View
 
 
 /**
@@ -23,13 +22,9 @@ import android.view.View
 class PSCoordinatorLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null)
     : CoordinatorLayout(context, attrs) {
 
-    var isAllowForScroll = false
-
-    override fun onStartNestedScroll(child: View, target: View, nestedScrollAxes: Int): Boolean {
-        return isAllowForScroll && super.onStartNestedScroll(child, target, nestedScrollAxes)
-    }
+    var allowTouchEvents = true
 
     override fun onTouchEvent(ev: MotionEvent?): Boolean {
-        return isAllowForScroll && super.onTouchEvent(ev)
+        return allowTouchEvents && super.onTouchEvent(ev)
     }
 }

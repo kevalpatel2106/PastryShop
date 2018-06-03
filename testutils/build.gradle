@@ -17,10 +17,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 27
+    buildToolsVersion '27.0.3'
+
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 27
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -35,4 +38,7 @@ dependencies {
 
     // Mock web server
     implementation "com.squareup.okhttp3:mockwebserver:${versions.okHttp}"
+
+    implementation "com.android.support.test.espresso:espresso-core:${versions.espresso}"
+
 }

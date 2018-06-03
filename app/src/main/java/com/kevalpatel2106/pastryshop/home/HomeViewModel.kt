@@ -9,10 +9,7 @@
 package com.kevalpatel2106.pastryshop.home
 
 import android.arch.lifecycle.MutableLiveData
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
-import com.kevalpatel2106.pastryshop.R
+import android.support.annotation.VisibleForTesting
 import com.kevalpatel2106.pastryshop.bin.Pages
 import com.kevalpatel2106.pastryshop.repository.Repository
 import com.kevalpatel2106.pastryshop.utils.BaseViewModel
@@ -56,12 +53,12 @@ internal class HomeViewModel @Inject constructor(
     internal val errorLoadingPages = SingleLiveEvent<String>()
 
     /**
-     * [SingleLiveEvent] to notify about the error occurred while making call to the restaurant using
-     * contact info.
+     * Contact number of the restaurant. This class will asynchronously load the phone number from
+     * cached response using [loadPhoneNumber]
      *
-     * @see callRestaurant
+     * @see loadPhoneNumber
      */
-    internal val errorLoadingContact = SingleLiveEvent<String>()
+    internal var phoneNumber: String? = null
 
     init {
         // Initialize
@@ -70,6 +67,7 @@ internal class HomeViewModel @Inject constructor(
 
         //Start loading the pages.
         loadPages()
+        loadPhoneNumber()
     }
 
     /**
@@ -82,7 +80,8 @@ internal class HomeViewModel @Inject constructor(
      *
      * @see [Repository.getPages]
      */
-    private fun loadPages() {
+    @VisibleForTesting
+    internal fun loadPages() {
         val d = repository.getPages()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -106,35 +105,20 @@ internal class HomeViewModel @Inject constructor(
     }
 
     /**
-     * Call the restaurant on the given number by opening the Dialer application available. View
-     * can react on any errors occurred during reading the contact information by observing
-     * [errorLoadingContact].
+     * Load the restaurant phone number from the cache. View can get the phone number from [phoneNumber].
      *
-     * @see [Repository.getContactInfo]
+     * @see Repository.getContactInfo
+     * @see phoneNumber
      */
-    internal fun callRestaurant(context: Context) {
+    @VisibleForTesting
+    internal fun loadPhoneNumber() {
         repository.getContactInfo()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({
-                    val intent = Intent(Intent.ACTION_DIAL).apply {
-                        data = Uri.parse("tel:${it.phone}")
-                    }
-
-                    // Check if the dialer app available?
-                    if (intent.resolveActivity(context.packageManager) != null) {
-
-                        // Open dialer
-                        context.startActivity(intent)
-                    } else {
-
-                        // There is no application to make calls.
-                        errorLoadingContact.value = context.getString(R.string.error_dialar_application)
-                    }
+                    phoneNumber = it.phone
                 }, {
-
-                    // Error occurred while reading the contact info.
-                    errorLoadingContact.value = it.message
+                    phoneNumber = null
                 })
     }
 }

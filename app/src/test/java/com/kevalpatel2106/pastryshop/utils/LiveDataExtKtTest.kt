@@ -11,12 +11,14 @@ package com.kevalpatel2106.pastryshop.utils
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Observer
-import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import org.mockito.Mock
+import org.mockito.Mockito
+import org.mockito.MockitoAnnotations
 
 /**
  * Created by Keval on 02/06/18.
@@ -25,30 +27,32 @@ import org.junit.runners.JUnit4
  */
 @RunWith(JUnit4::class)
 class LiveDataExtKtTest {
+    private val testString = "test"
+
     @Rule
     @JvmField
     val rule = InstantTaskExecutorRule()
 
     private lateinit var testLiveData: MutableLiveData<String>
-    private val testString = "test"
+    @Mock
+    private lateinit var eventObserver: Observer<String>
+
 
     @Before
     fun setUp() {
+        MockitoAnnotations.initMocks(this@LiveDataExtKtTest)
+
         testLiveData = MutableLiveData()
         testLiveData.value = testString
     }
 
     @Test
     fun checkRecall() {
-        var counter = 0
-        val observer = Observer<String> {
-            counter++
-            assertEquals(testString, it)
-        }
-        testLiveData.observeForever(observer)
+        testLiveData.observeForever(eventObserver)
 
         testLiveData.recall()
 
-        assertEquals(2, counter)
+        Mockito.verify(eventObserver, Mockito.times(2))
+                .onChanged(testString)
     }
 }

@@ -17,4 +17,5 @@
     <string name="shop_subtitle">PASTRY SHOP</string>
     <string name="sample_user_display_name">Jon Doe</string>
     <string name="error_dialar_application">No application found to make call.</string>
+    <string name="error_no_contact_information_available">No contact information available.</string>
 </resources>
