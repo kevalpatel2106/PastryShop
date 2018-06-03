@@ -29,7 +29,7 @@ ext {
     }
 
     lintOption = {
-        abortOnError true
+        abortOnError false
         htmlReport true
         xmlReport true
         textReport true

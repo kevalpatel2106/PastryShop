@@ -28,6 +28,14 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    //General options
+    compileOptions compileOption
+    dexOptions dexOption
+    packagingOptions packageExcludes
+    lintOptions lintOption
+    aaptOptions aaptOption
+    adbOptions adbOption
 }
 dependencies {
     implementation "com.android.support:appcompat-v7:${versions.supportLibrary}"
