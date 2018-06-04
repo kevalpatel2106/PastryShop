@@ -79,7 +79,7 @@ class HomeFragmentTest {
 
         // Check with the toolbar is expanded
         onView(withId(R.id.shop_name_tv))
-                .check(matches(withText(rule.activity.getString(R.string.shop_name))))
+                .check(matches(withText(rule.activity.getString(R.string.shop_name).toUpperCase())))
 
         // Check with the toolbar is collapsed
         // Swipe up
@@ -87,7 +87,7 @@ class HomeFragmentTest {
 
         // Check it the shop name is still visible
         onView(withId(R.id.shop_name_tv))
-                .check(matches(withText(rule.activity.getString(R.string.shop_name))))
+                .check(matches(withText(rule.activity.getString(R.string.shop_name).toUpperCase())))
 
         device.setOrientationNatural()
     }
@@ -96,7 +96,7 @@ class HomeFragmentTest {
     fun checkIfSubTitleDisplayed_Portrait() {
         // Check with the toolbar is expanded
         onView(withId(R.id.shop_subtitle_tv))
-                .check(matches(withText(rule.activity.getString(R.string.shop_subtitle))))
+                .check(matches(withText(rule.activity.getString(R.string.shop_subtitle).toUpperCase())))
 
         // Check with the toolbar is collapsed
         // Swipe up
@@ -104,7 +104,7 @@ class HomeFragmentTest {
 
         // Check it the shop name is still visible
         onView(withId(R.id.shop_subtitle_tv))
-                .check(matches(withText(rule.activity.getString(R.string.shop_subtitle))))
+                .check(matches(withText(rule.activity.getString(R.string.shop_subtitle).toUpperCase())))
     }
 
     @Test
@@ -115,7 +115,7 @@ class HomeFragmentTest {
 
         // Check with the toolbar is expanded
         onView(withId(R.id.shop_subtitle_tv))
-                .check(matches(withText(rule.activity.getString(R.string.shop_subtitle))))
+                .check(matches(withText(rule.activity.getString(R.string.shop_subtitle).toUpperCase())))
 
         // Check with the toolbar is collapsed
         // Swipe up
@@ -123,7 +123,7 @@ class HomeFragmentTest {
 
         // Check it the shop name is still visible
         onView(withId(R.id.shop_subtitle_tv))
-                .check(matches(withText(rule.activity.getString(R.string.shop_subtitle))))
+                .check(matches(withText(rule.activity.getString(R.string.shop_subtitle).toUpperCase())))
 
         device.setOrientationNatural()
     }

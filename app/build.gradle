@@ -22,7 +22,7 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = ["room.schemaLocation": '../schema']
+                arguments = ["room.schemaLocation": './schema']
             }
         }
     }
