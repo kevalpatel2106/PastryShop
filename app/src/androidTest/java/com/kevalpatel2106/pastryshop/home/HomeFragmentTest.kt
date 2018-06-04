@@ -130,19 +130,19 @@ class HomeFragmentTest {
 
     @Test
     fun checkDialer() {
-        // Wait for the network to get updated response
-        val idlingResource = ElapsedTimeIdlingResource(2000)
-        IdlingRegistry.getInstance().register(idlingResource)
-
         Intents.init()
+
+        // Wait for the network to get updated response
+        val idlingResource = ElapsedTimeIdlingResource(1000)
+        IdlingRegistry.getInstance().register(idlingResource)
 
         onView(withId(R.id.phone_fab)).perform(ViewActions.click())
 
         intended(hasAction(Intent.ACTION_DIAL))
         intended(hasData(Uri.parse("tel:${CacheDataManager.testPhone}")))
 
-        IdlingRegistry.getInstance().unregister(idlingResource)
-
         Intents.release()
+
+        IdlingRegistry.getInstance().unregister(idlingResource)
     }
 }

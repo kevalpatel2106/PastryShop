@@ -45,6 +45,9 @@ before_script:
     - android list targets
     - echo no | android create avd --force --name test --target android-21 --abi default/armeabi-v7a -d "Nexus 6"
 
+script:
+    - ./gradlew build jacocoTestReport assembleAndroidTest -PdisablePreDex --stacktrace
+
     # Start emulator
     - emulator -avd test -no-skin -no-audio -no-window &
     - android-wait-for-emulator
@@ -56,8 +59,7 @@ before_script:
     - adb shell settings put global animator_duration_scale 0.0
     - adb shell input keyevent 82 &
 
-script:
-    - ./gradlew app:assembleDebug jacocoTestReportDebug connectedAndroidTest -PdisablePreDex --stacktrace
+    - ./gradlew connectedCheck -PdisablePreDex --stacktrace
 
 after_success:
     - bash <(curl -s https://codecov.io/bash)

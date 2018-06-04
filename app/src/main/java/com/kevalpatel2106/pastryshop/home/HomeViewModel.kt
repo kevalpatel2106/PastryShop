@@ -67,7 +67,6 @@ internal class HomeViewModel @Inject constructor(
 
         //Start loading the pages.
         loadPages()
-        loadPhoneNumber()
     }
 
     /**
@@ -95,6 +94,9 @@ internal class HomeViewModel @Inject constructor(
                     pages.value!!.clear()
                     pages.value!!.addAll(it)
                     pages.recall()
+
+                    // Load phone numbers
+                    loadPhoneNumber()
                 }, {
 
                     // Something went wrong.
