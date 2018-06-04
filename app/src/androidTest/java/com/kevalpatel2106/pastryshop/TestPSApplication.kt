@@ -8,13 +8,13 @@
 
 package com.kevalpatel2106.pastryshop
 
-import android.arch.persistence.room.Room
-import com.kevalpatel2106.pastryshop.di.MockBaseDiModule
+import com.kevalpatel2106.pastryshop.di.DaggerMockRootComponent
+import com.kevalpatel2106.pastryshop.di.MockRootDiModule
 import com.kevalpatel2106.pastryshop.di.MockRootComponent
 import com.kevalpatel2106.pastryshop.di.RootComponent
-import com.kevalpatel2106.pastryshop.repository.db.PSDatabase
 import com.kevalpatel2106.pastryshop.utils.BaseApplication
 import com.kevalpatel2106.testutils.MockServerManager
+import java.io.IOException
 
 /**
  * Created by Keval on 01/06/18.
@@ -25,30 +25,28 @@ internal class TestPSApplication : BaseApplication() {
 
     var mockServerManager = MockServerManager()
 
-    /**
-     * Prepare the base url for the network server. This method will be called only once in application
-     * lifetime. We are going to use [MockServerManager] to mock the network source and use the mock
-     * server base url here.
-     */
-    override fun prepareBaseUrl(): String {
-        mockServerManager.startMockWebServer()
+    var baseUrl : String = ""
 
-        // Pass the mock web server url
-        return mockServerManager.getBaseUrl()
-    }
+    override fun onCreate() {
+        super.onCreate()
 
-    /**
-     * Prepare the [PSDatabase] for the application. This method will be called only once in application
-     * lifetime. For the testing purpose we are going to create in memory database.
-     */
-    override fun prepareDatabase(): PSDatabase {
-        // Create in memory database.
-        // No disk writes
+        // Start the mock server
+        val thread = object : Thread() {
+            override fun run() {
+                try {
+                    mockServerManager.startMockWebServer()
+                    // Pass the mock web server url
+                    baseUrl = mockServerManager.getBaseUrl()
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
 
-        return Room.inMemoryDatabaseBuilder(
-                this@TestPSApplication,
-                PSDatabase::class.java
-        ).build()
+            }
+        }
+        thread.start()
+
+        // Wait for the server to start
+        Thread.sleep(1000L)
     }
 
     /**
@@ -58,7 +56,7 @@ internal class TestPSApplication : BaseApplication() {
      */
     override fun prepareRootComponent(): RootComponent {
         return DaggerMockRootComponent.builder()
-                .mockBaseDiModule(MockBaseDiModule(this@TestPSApplication))
+                .mockRootDiModule(MockRootDiModule(this@TestPSApplication))
                 .build()
     }
 

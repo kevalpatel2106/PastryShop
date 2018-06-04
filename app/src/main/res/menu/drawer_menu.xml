@@ -26,9 +26,9 @@
         android:id="@+id/nav_bar_app_extras"
         android:checkableBehavior="none">
         <item
-            android:id="@+id/nav_about"
+            android:id="@+id/nav_github"
             android:checkable="false"
-            android:icon="@drawable/ic_info"
-            android:title="@string/nav_menu_title_about"/>
+            android:icon="@drawable/ic_github"
+            android:title="@string/nav_menu_title_github"/>
     </group>
 </menu>

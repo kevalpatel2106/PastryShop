@@ -11,9 +11,12 @@ package com.kevalpatel2106.pastryshop.di
 import android.app.Application
 import android.content.Context
 import com.kevalpatel2106.pastryshop.PSApplication
+import com.kevalpatel2106.pastryshop.repository.RepoDiModule
+import com.kevalpatel2106.pastryshop.repository.db.PSDatabase
 import com.kevalpatel2106.pastryshop.utils.BaseApplication
 import com.kevalpatel2106.pastryshop.utils.SharedPrefsProvider
 import dagger.Component
+import javax.inject.Named
 import javax.inject.Singleton
 
 /**
@@ -34,4 +37,9 @@ internal interface RootComponent {
     fun geBaseApplication(): BaseApplication
 
     fun getSharedPrefsProvider(): SharedPrefsProvider
+
+    fun getDatabase(): PSDatabase
+
+    @Named(RootDiModule.BASE_URL)
+    fun getBaseUrl(): String
 }

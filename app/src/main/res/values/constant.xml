@@ -14,4 +14,5 @@
     <string name="transition_name_home_card_title" translatable="false">main</string>
     <string name="transition_name_home_card_description" translatable="false">descr</string>
     <string name="transition_name_home_card_image" translatable="false">image</string>
+    <string name="github_repo_link" translatable="false">https://github.com/kevalpatel2106/PastryShop</string>
 </resources>

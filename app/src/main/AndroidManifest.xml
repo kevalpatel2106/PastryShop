@@ -40,8 +40,8 @@
 
         <!--Test activity-->
         <activity
-            android:name=".FragmentRuleActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:name="com.kevalpatel2106.testutils.FragmentRuleActivity"
+            android:theme="@style/AppTheme.NoActionbar" />
     </application>
 
 </manifest>

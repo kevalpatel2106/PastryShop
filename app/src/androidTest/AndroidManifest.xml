@@ -7,7 +7,7 @@
   -->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.kevalpatel2106.pastryshop">
+          package="com.kevalpatel2106.pastryshop">
 
-    <application android:name=".TestPSApplication" />
+    <application android:name=".TestPSApplication"/>
 </manifest>

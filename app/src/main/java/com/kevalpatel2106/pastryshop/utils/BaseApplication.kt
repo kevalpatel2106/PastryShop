@@ -28,16 +28,6 @@ internal abstract class BaseApplication : Application() {
     protected lateinit var rootComponent: RootComponent
 
     /**
-     * [PSDatabase] for the application.
-     */
-    private lateinit var database: PSDatabase
-
-    /**
-     * Base url of the remote server.
-     */
-    private lateinit var baseUrl: String
-
-    /**
      * Prepare the [RootComponent] that will contain the root of the dependency graph. You can easily
      * mock these objects for tests by providing mock version of [RootComponent]. See android test
      * source for detail.
@@ -45,18 +35,6 @@ internal abstract class BaseApplication : Application() {
     protected abstract fun prepareRootComponent(): RootComponent
 
     protected abstract fun injectRootComponent()
-
-    /**
-     * Prepare the [PSDatabase] for the application. This method will be called only once in application
-     * lifetime.
-     */
-    protected abstract fun prepareDatabase(): PSDatabase
-
-    /**
-     * Prepare the base url for the network server. This method will be called only once in application
-     * lifetime.
-     */
-    protected abstract fun prepareBaseUrl(): String
 
     override fun onCreate() {
         super.onCreate()
@@ -66,14 +44,7 @@ internal abstract class BaseApplication : Application() {
 
         //Inject dagger
         injectRootComponent()
-
-        database = prepareDatabase()
-        baseUrl = prepareBaseUrl()
     }
-
-    fun getDb() = database
-
-    fun getBaseUrl() = baseUrl
 
     companion object {
 

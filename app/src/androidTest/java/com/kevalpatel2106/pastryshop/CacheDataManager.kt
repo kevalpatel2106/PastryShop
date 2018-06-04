@@ -12,29 +12,33 @@ import com.kevalpatel2106.pastryshop.bin.Contact
 import com.kevalpatel2106.pastryshop.bin.Pages
 import com.kevalpatel2106.pastryshop.repository.db.PagesDao
 import com.kevalpatel2106.pastryshop.utils.SharedPrefsProvider
+import javax.inject.Inject
 
 /**
  * Created by Keval on 03/06/18.
  *
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
-class MockCacheManager(private val pagesDao: PagesDao,
-                       private val sharedPrefsProvider: SharedPrefsProvider) {
+class CacheDataManager @Inject constructor(
+        private val pagesDao: PagesDao,
+        private val sharedPrefsProvider: SharedPrefsProvider
+) {
 
+    companion object {
 
-    internal val testTitle = "test_title"
-    internal val testsDescription = "test_description"
-    internal val testImages = ArrayList<String>()
+        internal const val testTitle = "test_title"
+        internal const val testsDescription = "test_description"
+        internal val testImages = ArrayList<String>()
 
-    internal val testPhone = "3726583269"
-    internal val testEmail = "test@example.com"
-    internal val testTwitter = "@kevalpatel2106"
+        internal const val testPhone = "3726583269"
+        internal const val testEmail = "test@example.com"
+        internal const val testTwitter = "@kevalpatel2106"
 
-    init {
-        testImages.add("http://eample.com/image1.jgp")
-        testImages.add("http://eample.com/image2.jgp")
+        init {
+            testImages.add("http://eample.com/image1.jgp")
+            testImages.add("http://eample.com/image2.jgp")
+        }
     }
-
 
     /**
      * Fill the cache/database using the fake items.

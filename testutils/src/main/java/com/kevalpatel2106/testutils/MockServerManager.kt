@@ -61,7 +61,6 @@ class MockServerManager : Closeable {
             e.printStackTrace()
             throw RuntimeException("Failed to start mock server.")
         }
-
     }
 
     /**

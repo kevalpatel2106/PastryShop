@@ -9,12 +9,18 @@
 package com.kevalpatel2106.pastryshop.di
 
 import android.app.Application
+import android.arch.persistence.room.Room
 import android.content.Context
+import com.kevalpatel2106.pastryshop.TestPSApplication
+import com.kevalpatel2106.pastryshop.repository.db.PSDatabase
 import com.kevalpatel2106.pastryshop.utils.BaseApplication
 import com.kevalpatel2106.pastryshop.utils.SharedPrefsProvider
 import com.kevalpatel2106.testutils.MockSharedPreference
 import dagger.Module
 import dagger.Provides
+import java.io.IOException
+import java.util.logging.Handler
+import javax.inject.Named
 import javax.inject.Singleton
 
 /**
@@ -23,7 +29,7 @@ import javax.inject.Singleton
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
 @Module
-internal class MockBaseDiModule(private val application: Application) {
+internal class MockRootDiModule(private val application: Application) {
 
     @Singleton
     @Provides
@@ -45,9 +51,31 @@ internal class MockBaseDiModule(private val application: Application) {
 
     @Singleton
     @Provides
-    fun provideSharedPreferenceProvider(context: Context): SharedPrefsProvider {
+    fun provideTestApplication(): TestPSApplication {
+        return application as TestPSApplication
+    }
+
+    @Singleton
+    @Provides
+    fun provideSharedPreferenceProvider(): SharedPrefsProvider {
 
         // Create in memory shared preference
         return SharedPrefsProvider(MockSharedPreference())
+    }
+
+    @Singleton
+    @Provides
+    @Named(RootDiModule.BASE_URL)
+    fun provideBaseUrl(application : TestPSApplication): String {
+        return application.baseUrl
+    }
+
+    @Singleton
+    @Provides
+    fun provideDatabase(application: Application): PSDatabase {
+        return Room.inMemoryDatabaseBuilder(
+                application,
+                PSDatabase::class.java
+        ).build()
     }
 }

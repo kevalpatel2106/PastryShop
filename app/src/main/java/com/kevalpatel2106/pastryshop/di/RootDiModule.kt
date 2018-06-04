@@ -9,12 +9,17 @@
 package com.kevalpatel2106.pastryshop.di
 
 import android.app.Application
+import android.arch.persistence.room.Room
 import android.content.Context
 import android.preference.PreferenceManager
+import com.kevalpatel2106.pastryshop.BuildConfig
+import com.kevalpatel2106.pastryshop.repository.RepoDiModule
+import com.kevalpatel2106.pastryshop.repository.db.PSDatabase
 import com.kevalpatel2106.pastryshop.utils.BaseApplication
 import com.kevalpatel2106.pastryshop.utils.SharedPrefsProvider
 import dagger.Module
 import dagger.Provides
+import javax.inject.Named
 import javax.inject.Singleton
 
 /**
@@ -23,8 +28,11 @@ import javax.inject.Singleton
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
 @Module
-internal
-open class RootDiModule(private val application: Application) {
+internal class RootDiModule(private val application: Application) {
+
+    companion object {
+        const val BASE_URL = "base_url"
+    }
 
     @Singleton
     @Provides
@@ -46,7 +54,24 @@ open class RootDiModule(private val application: Application) {
 
     @Singleton
     @Provides
-    open fun provideSharedPreferenceProvider(context: Context): SharedPrefsProvider {
+    fun provideSharedPreferenceProvider(context: Context): SharedPrefsProvider {
         return SharedPrefsProvider(PreferenceManager.getDefaultSharedPreferences(context))
+    }
+
+    @Singleton
+    @Provides
+    fun provideDatabase(application: Application): PSDatabase {
+        return Room.databaseBuilder(
+                application,
+                PSDatabase::class.java,
+                PSDatabase.DB_NAME
+        ).build()
+    }
+
+    @Singleton
+    @Provides
+    @Named(BASE_URL)
+    fun provideBaseUrl(): String {
+        return BuildConfig.BASE_URL
     }
 }

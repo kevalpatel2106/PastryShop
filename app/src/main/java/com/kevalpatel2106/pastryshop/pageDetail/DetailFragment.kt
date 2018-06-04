@@ -23,6 +23,7 @@ import android.view.ViewGroup
 import com.kevalpatel2106.pastryshop.R
 import com.kevalpatel2106.pastryshop.di.DaggerAppDiComponent
 import com.kevalpatel2106.pastryshop.utils.BaseApplication
+import com.kevalpatel2106.pastryshop.utils.showSnack
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_detail.*
 import kotlinx.android.synthetic.main.fragment_detail.view.*
@@ -78,6 +79,9 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        model.errorLoadingPage.observe(this@DetailFragment, Observer {
+            it?.let { showSnack(it) }
+        })
         model.name.observe(this@DetailFragment, Observer {
             it?.let { detail_title_tv.text = it }
         })
@@ -143,7 +147,8 @@ class DetailFragment : Fragment() {
                 id: Long,
                 name: String,
                 description: String,
-                images: ArrayList<String>
+                images: ArrayList<String>,
+                uesTransition: Boolean = true
         ): DetailFragment {
 
             return DetailFragment().apply {
@@ -157,10 +162,12 @@ class DetailFragment : Fragment() {
                 }
 
                 //Enter animation
-                sharedElementEnterTransition = TransitionInflater.from(context)
-                        .inflateTransition(R.transition.detail_transition)
-                enterTransition = TransitionInflater.from(context)
-                        .inflateTransition(android.R.transition.fade)
+                if (uesTransition) {
+                    sharedElementEnterTransition = TransitionInflater.from(context)
+                            .inflateTransition(R.transition.detail_transition)
+                    enterTransition = TransitionInflater.from(context)
+                            .inflateTransition(android.R.transition.fade)
+                }
             }
         }
     }

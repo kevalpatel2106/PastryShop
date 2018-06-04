@@ -23,6 +23,8 @@ import android.view.Gravity
 import com.kevalpatel2106.pastryshop.R
 import com.kevalpatel2106.pastryshop.home.HomeFragment
 import com.kevalpatel2106.testutils.DrawableMatcher
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.layout_drawer.*
 import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
@@ -63,7 +65,7 @@ class MainActivityTest {
         assertTrue(rule.activity.main_drawer_layout.isDrawerOpen(Gravity.START))
 
         // Switch to portrait
-        device.setOrientationRight()
+        device.setOrientationNatural()
         assertTrue(rule.activity.main_drawer_layout.isDrawerOpen(Gravity.START))
     }
 

@@ -18,7 +18,13 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.kevalpatel2106.pastryshop.UiTestsRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": '../schema']
+            }
+        }
     }
 
     buildTypes {

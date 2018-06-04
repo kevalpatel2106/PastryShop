@@ -10,4 +10,5 @@
 
     <color name="detailCloseButtonBg">#22111111</color>
     <color name="colorBronco">#A5937A</color>
+    <color name="colorNavigationSelect">#DC603A</color>
 </resources>

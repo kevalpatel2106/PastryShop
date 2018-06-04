@@ -20,6 +20,9 @@ import com.kevalpatel2106.pastryshop.home.HomeFragment
 import com.kevalpatel2106.pastryshop.utils.prepareLaunchIntent
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_drawer.*
+import android.content.Intent
+import android.net.Uri
+
 
 /**
  * Dashboard or the landing screen of the application.
@@ -66,8 +69,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     supportFragmentManager.executePendingTransactions()
                 }
             }
-            R.id.nav_about -> { //User clicked on Info
-                //TODO Implement about screen
+            R.id.nav_github -> { //User clicked on Info
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.github_repo_link)))
+                startActivity(browserIntent)
             }
             else -> throw IllegalArgumentException("Invalid id for the navigation drawer.")
         }

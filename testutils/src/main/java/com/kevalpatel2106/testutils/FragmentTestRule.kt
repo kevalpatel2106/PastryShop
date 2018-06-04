@@ -46,7 +46,7 @@ class FragmentTestRule<F : Fragment>(fragmentClass: Class<F>,
         //Instantiate and insert the fragment into the container layout
         val manager = activity.supportFragmentManager
         val transaction = manager.beginTransaction()
-        transaction.replace(R.id.container, fragment)
+        transaction.replace(FragmentRuleActivity.CONTAINER_ID, fragment)
         transaction.commit()
 
 

@@ -8,7 +8,7 @@
 
 <resources>
     <string name="nav_menu_title_home">Home</string>
-    <string name="nav_menu_title_about">About</string>
+    <string name="nav_menu_title_github">GitHub</string>
 
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>

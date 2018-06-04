@@ -10,6 +10,8 @@ package com.kevalpatel2106.testutils
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.ViewGroup
+import android.widget.FrameLayout
 
 /**
  * Created by Keval on 21-Jul-17.
@@ -18,8 +20,18 @@ import android.support.v7.app.AppCompatActivity
 
 class FragmentRuleActivity : AppCompatActivity() {
 
+    companion object {
+        const val CONTAINER_ID = 384
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_test)
+
+        val frameLayout = FrameLayout(this@FragmentRuleActivity)
+        setContentView(frameLayout)
+
+        frameLayout.layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
+        frameLayout.layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
+        frameLayout.id = CONTAINER_ID
     }
 }

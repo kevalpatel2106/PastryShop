@@ -21,17 +21,6 @@ import com.kevalpatel2106.pastryshop.utils.BaseApplication
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
 internal class PSApplication : BaseApplication() {
-    override fun prepareBaseUrl(): String {
-        return BuildConfig.BASE_URL
-    }
-
-    override fun prepareDatabase(): PSDatabase {
-        return Room.databaseBuilder(
-                this@PSApplication,
-                PSDatabase::class.java,
-                PSDatabase.DB_NAME
-        ).build()
-    }
 
     override fun prepareRootComponent(): RootComponent {
         return DaggerRootComponent.builder()

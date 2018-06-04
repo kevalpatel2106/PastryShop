@@ -48,5 +48,6 @@ dependencies {
     implementation "com.squareup.okhttp3:mockwebserver:${versions.okHttp}"
 
     implementation "com.android.support.test.espresso:espresso-core:${versions.espresso}"
+    implementation "com.android.support.test.espresso:espresso-idling-resource:${versions.espresso}"
 
 }
