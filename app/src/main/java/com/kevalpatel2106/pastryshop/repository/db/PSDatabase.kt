@@ -15,6 +15,7 @@ import com.kevalpatel2106.pastryshop.bin.Pages
 
 /**
  * Created by Keval on 01/06/18.
+ * Application database. This database contains one table - [Pages].
  *
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
@@ -35,5 +36,5 @@ abstract class PSDatabase : RoomDatabase() {
         const val DB_VERSION = 1
     }
 
-    abstract fun cardsDao(): PagesDao
+    abstract fun pagesDao(): PagesDao
 }

@@ -13,12 +13,16 @@ import android.support.v7.widget.LinearLayoutManager
 
 /**
  * Created by Keval on 01/06/18.
+ * Custom [LinearLayoutManager].
  *
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
 class PSLinearLayoutManager(context: Context,
                             orientation: Int = LinearLayoutManager.VERTICAL,
                             reverseLayout: Boolean = false) : LinearLayoutManager(context, orientation, reverseLayout) {
+    /**
+     * True to allow [PSLinearLayoutManager] to scroll the recycler view.
+     */
     var isScrollEnabled = true
 
     override fun canScrollVertically(): Boolean {

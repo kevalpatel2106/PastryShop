@@ -8,16 +8,16 @@
 
 package com.kevalpatel2106.pastryshop
 
-import android.arch.persistence.room.Room
 import com.kevalpatel2106.pastryshop.di.DaggerRootComponent
 import com.kevalpatel2106.pastryshop.di.RootComponent
 import com.kevalpatel2106.pastryshop.di.RootDiModule
-import com.kevalpatel2106.pastryshop.repository.db.PSDatabase
 import com.kevalpatel2106.pastryshop.utils.BaseApplication
 
 /**
  * Created by Keval on 01/06/18.
+ * [BaseApplication] for the app.
  *
+ * @see BaseApplication
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
 internal class PSApplication : BaseApplication() {

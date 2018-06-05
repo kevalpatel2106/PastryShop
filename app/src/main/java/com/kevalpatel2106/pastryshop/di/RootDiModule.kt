@@ -13,7 +13,6 @@ import android.arch.persistence.room.Room
 import android.content.Context
 import android.preference.PreferenceManager
 import com.kevalpatel2106.pastryshop.BuildConfig
-import com.kevalpatel2106.pastryshop.repository.RepoDiModule
 import com.kevalpatel2106.pastryshop.repository.db.PSDatabase
 import com.kevalpatel2106.pastryshop.utils.BaseApplication
 import com.kevalpatel2106.pastryshop.utils.SharedPrefsProvider
@@ -24,6 +23,8 @@ import javax.inject.Singleton
 
 /**
  * Created by Keval on 01/06/18.
+ * Dagger [Module] to provide application, database and network base url dependencies. In the test
+ * environment you can mock this dependencies and inject mocks into the application.
  *
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
@@ -58,6 +59,11 @@ internal class RootDiModule(private val application: Application) {
         return SharedPrefsProvider(PreferenceManager.getDefaultSharedPreferences(context))
     }
 
+    /**
+     * Room database .
+     *
+     * @see PSDatabase
+     */
     @Singleton
     @Provides
     fun provideDatabase(application: Application): PSDatabase {
@@ -68,6 +74,9 @@ internal class RootDiModule(private val application: Application) {
         ).build()
     }
 
+    /**
+     * Base url of the API endpoints.
+     */
     @Singleton
     @Provides
     @Named(BASE_URL)

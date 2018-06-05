@@ -20,19 +20,19 @@ import io.reactivex.Single
  */
 class MockPagesDao(val tableItems: ArrayList<Pages>) : PagesDao {
 
-    override fun insert(cards: Pages): Long {
-        tableItems.add(cards)
+    override fun insert(pages: Pages): Long {
+        tableItems.add(pages)
         return tableItems.lastIndex.toLong()
     }
 
-    override fun update(cards: Pages): Int {
+    override fun update(pages: Pages): Int {
         val numberOfUpdatedItem = 0
 
         (0 until tableItems.size)
-                .filter { it -> tableItems[it].id == cards.id }
+                .filter { it -> tableItems[it].id == pages.id }
                 .forEach { it ->
                     numberOfUpdatedItem.inc()
-                    tableItems[it] = cards
+                    tableItems[it] = pages
                 }
         return numberOfUpdatedItem
     }
@@ -41,7 +41,7 @@ class MockPagesDao(val tableItems: ArrayList<Pages>) : PagesDao {
         return Single.create { it.onSuccess(tableItems.size) }
     }
 
-    override fun getAllCards(): Flowable<List<Pages>> {
+    override fun getAllPages(): Flowable<List<Pages>> {
         return Flowable.create({
             it.onNext(tableItems)
 
@@ -50,7 +50,7 @@ class MockPagesDao(val tableItems: ArrayList<Pages>) : PagesDao {
         }, BackpressureStrategy.LATEST)
     }
 
-    override fun getCardFromId(id: Long): Pages? {
+    override fun getPageFromId(id: Long): Pages? {
         tableItems.filter { it.id == id }
                 .forEach {
                     return it
@@ -83,7 +83,7 @@ class MockPagesDao(val tableItems: ArrayList<Pages>) : PagesDao {
         }
     }
 
-    override fun deleteNotUpdatedCards(updateTime: Long) {
+    override fun deleteNotUpdatedPages(updateTime: Long) {
         val updateCards = ArrayList<Pages>()
 
         tableItems.filter { it.updateMills < updateTime }.forEach { updateCards.add(it) }

@@ -13,10 +13,11 @@ import retrofit2.http.GET
 
 /**
  * Created by Keval on 01/06/18.
+ * List of all the server endpoints.
  *
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
-interface Endpoint {
+internal interface Endpoint {
 
     @GET("app_data.json")
     fun getData(): Single<GetDataResponse>

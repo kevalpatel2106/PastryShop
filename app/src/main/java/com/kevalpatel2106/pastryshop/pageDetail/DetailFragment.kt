@@ -30,7 +30,7 @@ import kotlinx.android.synthetic.main.fragment_detail.view.*
 import javax.inject.Inject
 
 /**
- * A simple [Fragment] subclass.
+ * A simple [Fragment] subclass to display the page details.
  *
  */
 class DetailFragment : Fragment() {
@@ -120,6 +120,9 @@ class DetailFragment : Fragment() {
         model.observePage(pageId)
     }
 
+    /**
+     * Parse and validate the arguments received in the fragment.
+     */
     private fun parseArguments() {
         when {
             arguments == null -> throw IllegalArgumentException("No argument passed.")
@@ -142,6 +145,10 @@ class DetailFragment : Fragment() {
         private const val ARG_DESCRIPTION = "description"
         private const val ARG_IMAGES = "images"
 
+        /**
+         * Static factory method to get new instance of the [DetailFragment] class. Make [uesTransition]
+         * false if you don't want to use shared element transitions between fragments (Useful in tests).
+         */
         internal fun newInstance(
                 context: Context,
                 id: Long,

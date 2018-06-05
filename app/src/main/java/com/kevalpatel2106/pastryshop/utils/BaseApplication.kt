@@ -11,10 +11,10 @@ package com.kevalpatel2106.pastryshop.utils
 import android.app.Application
 import android.content.Context
 import com.kevalpatel2106.pastryshop.di.RootComponent
-import com.kevalpatel2106.pastryshop.repository.db.PSDatabase
 
 /**
  * Created by Keval on 01/06/18.
+ * Base [Application] that can be extended in different build variants.
  *
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
@@ -34,6 +34,9 @@ internal abstract class BaseApplication : Application() {
      */
     protected abstract fun prepareRootComponent(): RootComponent
 
+    /**
+     * Inject [RootComponent] into the class that inherits [BaseApplication].
+     */
     protected abstract fun injectRootComponent()
 
     override fun onCreate() {

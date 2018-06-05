@@ -16,12 +16,16 @@ import android.view.MotionEvent
 
 /**
  * Created by Keval on 01/06/18.
+ * Custom [CoordinatorLayout].
  *
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
 class PSCoordinatorLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null)
     : CoordinatorLayout(context, attrs) {
 
+    /**
+     * True to allow [PSCoordinatorLayout] to respond user touch events else false.
+     */
     var allowTouchEvents = true
 
     override fun onTouchEvent(ev: MotionEvent?): Boolean {

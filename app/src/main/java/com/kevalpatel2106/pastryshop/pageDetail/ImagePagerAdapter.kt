@@ -21,7 +21,9 @@ import kotlinx.android.synthetic.main.item_image_pager.view.*
 
 /**
  * Created by Keval on 03/06/18.
+ * [PagerAdapter] to display images into the viewpager.
  *
+ * @param images List of urls of the images to display in the view pager.
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
 internal class ImagePagerAdapter(
@@ -40,6 +42,7 @@ internal class ImagePagerAdapter(
         val itemView = LayoutInflater.from(context)
                 .inflate(R.layout.item_image_pager, container, false)
 
+        // Display the image
         Picasso.get()
                 .load(images[position])
                 .noFade()

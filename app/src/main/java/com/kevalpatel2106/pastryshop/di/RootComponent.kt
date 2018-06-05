@@ -11,7 +11,6 @@ package com.kevalpatel2106.pastryshop.di
 import android.app.Application
 import android.content.Context
 import com.kevalpatel2106.pastryshop.PSApplication
-import com.kevalpatel2106.pastryshop.repository.RepoDiModule
 import com.kevalpatel2106.pastryshop.repository.db.PSDatabase
 import com.kevalpatel2106.pastryshop.utils.BaseApplication
 import com.kevalpatel2106.pastryshop.utils.SharedPrefsProvider
@@ -21,8 +20,10 @@ import javax.inject.Singleton
 
 /**
  * Created by Keval on 01/06/18.
+ * Dagger [Component] that injects dependencies provided by [RootDiModule] into [BaseApplication].
  *
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
+ * @see RootDiModule
  */
 @Singleton
 @Component(modules = [RootDiModule::class])

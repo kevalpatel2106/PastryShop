@@ -10,7 +10,11 @@ package com.kevalpatel2106.pastryshop.bin
 
 /**
  * Created by Keval on 02/06/18.
+ * Bin that holds the contact information.
  *
+ * @param phone Mobile number.
+ * @param email Email address.
+ * @param twitter Url of the twitter handler.
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
 data class Contact(
@@ -23,6 +27,8 @@ data class Contact(
 ) {
 
     companion object {
+
+        // Preference keys name.
         const val PREF_KEY_PHONE = "phone"
         const val PREF_KEY_EMAIL = "email"
         const val PREF_KEY_TWITTER = "twitter"

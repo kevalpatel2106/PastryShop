@@ -11,7 +11,7 @@ package com.kevalpatel2106.pastryshop.utils
 import android.content.SharedPreferences
 
 /**
- * Created by Keval on 20-Aug-16.
+ * Created by Keval on 01-Jun-18.
  * Class contains all the helper functions to deal with shared prefs. You need to call [SharedPrefsProvider.init]
  * to initialize the shared preferences in your application class.
  *

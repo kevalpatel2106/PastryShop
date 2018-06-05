@@ -14,10 +14,11 @@ import javax.inject.Inject
 import javax.inject.Provider
 
 
-
 /**
  * Created by Keval on 01/06/18.
+ * Inject view models using dagger.
  *
+ * @see <a href="https://github.com/googlesamples/android-architecture-components/blob/master/GithubBrowserSample/app/src/main/java/com/android/example/github/viewmodel/GithubViewModelFactory.kt">Google Samples</a>
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
 @ApplicationScope

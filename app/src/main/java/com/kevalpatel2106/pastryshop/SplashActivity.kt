@@ -19,6 +19,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
+/**
+ * The launcher activity for the application.
+ */
 class SplashActivity : AppCompatActivity() {
     private val tag = "SplashActivity"
 

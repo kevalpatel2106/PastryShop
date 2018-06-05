@@ -14,7 +14,6 @@ import com.kevalpatel2106.pastryshop.repository.db.PSDatabase
 import com.kevalpatel2106.pastryshop.repository.db.PagesDao
 import com.kevalpatel2106.pastryshop.repository.network.Network
 import com.kevalpatel2106.pastryshop.utils.ApplicationScope
-import com.kevalpatel2106.pastryshop.utils.BaseApplication
 import com.kevalpatel2106.pastryshop.utils.SharedPrefsProvider
 import dagger.Module
 import dagger.Provides
@@ -22,6 +21,7 @@ import javax.inject.Named
 
 /**
  * Created by Keval on 01/06/18.
+ * Dagger [Module] to provide the dependencies such as [Repository, [PagesDao], [Network] etc.
  *
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
@@ -50,8 +50,8 @@ internal class RepoDiModule {
 
     @Provides
     @ApplicationScope
-    fun provideCardsDao(database: PSDatabase): PagesDao {
-        return database.cardsDao()
+    fun providePagesDao(database: PSDatabase): PagesDao {
+        return database.pagesDao()
     }
 
     @Provides

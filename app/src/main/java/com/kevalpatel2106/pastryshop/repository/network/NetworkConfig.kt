@@ -10,11 +10,12 @@ package com.kevalpatel2106.pastryshop.repository.network
 
 /**
  * Created by Keval on 01/06/18.
+ * Network related configurations.
  *
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
 
-object NetworkConfig {
+internal object NetworkConfig {
 
     /**
      * Request read timeout in minutes.
@@ -30,7 +31,4 @@ object NetworkConfig {
      * Network connection timeout in minutes.
      */
     internal const val CONNECTION_TIMEOUT = 1L
-
-
-    internal const val INTERNET_NOT_AVAILABLE_BROADCAST = "com.kevalpatel2106.pastryshop.internet_unavailable"
 }

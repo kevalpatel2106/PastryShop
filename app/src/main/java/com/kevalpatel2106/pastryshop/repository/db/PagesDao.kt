@@ -18,36 +18,64 @@ import io.reactivex.Single
 
 /**
  * Created by Keval on 01/06/18.
+ * [Dao] that contains database access methods to deal with [Pages] table.
  *
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
 @Dao
 interface PagesDao {
 
+    /**
+     * Insert new [Pages] to the table.
+     */
     @Insert
-    fun insert(cards: Pages): Long
+    fun insert(pages: Pages): Long
 
+    /**
+     * Update existing [Pages].
+     */
     @Update
-    fun update(cards: Pages): Int
+    fun update(pages: Pages): Int
 
+    /**
+     * Get the total number of entries in the [Pages] table.
+     */
     @Query("SELECT COUNT(*) FROM ${Pages.PAGES_TABLE}")
     fun getCount(): Single<Int>
 
+    /**
+     * Get the list of all the [Pages] from the table.
+     */
     @Query("SELECT * FROM ${Pages.PAGES_TABLE}")
-    fun getAllCards(): Flowable<List<Pages>>
+    fun getAllPages(): Flowable<List<Pages>>
 
+    /**
+     * Get information of the [Pages] with given [id].
+     */
     @Query("SELECT * FROM ${Pages.PAGES_TABLE} WHERE ${Pages.PAGE_ID}=:id")
-    fun getCardFromId(id: Long): Pages?
+    fun getPageFromId(id: Long): Pages?
 
+    /**
+     * Observe the [Pages] with [id] for changes.
+     */
     @Query("SELECT * FROM ${Pages.PAGES_TABLE} WHERE ${Pages.PAGE_ID}=:id")
     fun observePage(id: Long): Flowable<Pages>
 
+    /**
+     * Get the count of the row with [id] in [Pages] table.
+     */
     @Query("SELECT COUNT(*) FROM ${Pages.PAGES_TABLE} WHERE ${Pages.PAGE_ID}=:id")
     fun hasPage(id: Long): Single<Int>
 
+    /**
+     * Delete the [Pages] entries which are updated before [updateTime].
+     */
     @Query("DELETE FROM ${Pages.PAGES_TABLE} WHERE ${Pages.PAGE_UPDATE_TIME}<:updateTime")
-    fun deleteNotUpdatedCards(updateTime: Long)
+    fun deleteNotUpdatedPages(updateTime: Long)
 
+    /**
+     * Delete the [Pages] table.
+     */
     @Query("DELETE FROM ${Pages.PAGES_TABLE}")
     fun nukeTable()
 }

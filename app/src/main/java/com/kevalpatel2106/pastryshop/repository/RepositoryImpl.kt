@@ -32,6 +32,11 @@ internal class RepositoryImpl(private val network: Network,
                               private val pagesDao: PagesDao,
                               private val sharedPrefsProvider: SharedPrefsProvider) : Repository {
 
+    /**
+     * Call the server and refresh all the data into the cache.
+     *
+     * @return [Single] of list of [Pages].
+     */
     override fun refreshData(): Single<ArrayList<Pages>> {
 
         return network.getRetrofitClient()
@@ -59,7 +64,7 @@ internal class RepositoryImpl(private val network: Network,
                     //Save to each page into database
                     pages.forEach {
 
-                        if (pagesDao.getCardFromId(it.id) == null) {
+                        if (pagesDao.getPageFromId(it.id) == null) {
 
                             // There is no page for this id present into the db.
                             // Insert new raw.
@@ -74,7 +79,7 @@ internal class RepositoryImpl(private val network: Network,
 
                     // Delete all the old pages which where not returned from the server in the response.
                     if (pages.isNotEmpty()) {
-                        pagesDao.deleteNotUpdatedCards(pages[0].updateMills)
+                        pagesDao.deleteNotUpdatedPages(pages[0].updateMills)
                     }
                     return@map pages
                 }
@@ -103,17 +108,26 @@ internal class RepositoryImpl(private val network: Network,
                                     // Once the data synced successfully,
                                     // read all the pages from the database & start observing
                                     // database changes.
-                                    pagesDao.getAllCards().toObservable()
+                                    pagesDao.getAllPages().toObservable()
                                 }
                     }
 
                     // There are cached items into the database.
                     // Read all the pages from the database & start observing database changes.
-                    return@flatMapObservable pagesDao.getAllCards().toObservable()
+                    return@flatMapObservable pagesDao.getAllPages().toObservable()
                 }
                 .map { it as ArrayList<Pages> } //Map list as array list. (Room doesn't support array list as output type)
     }
 
+    /**
+     * Get the details of the [Pages] with [pageId]. This will load the cached [Pages] data from the
+     * database and emits the new result every time there are any changes made to the database. If
+     * there isn't any cached data for the [pageId] into the database, this method will retrieve the
+     * data from the server using [refreshData] and cache it to the database for future use.
+     *
+     * @return [Observable] of [Pages]. Once the subscriber subscribes to this [Observable],
+     * it will keep emitting whenever there are any changes into the data until the stream gets dispose.
+     */
     override fun getPage(pageId: Long): Observable<Pages> {
         return pagesDao.hasPage(pageId)
                 .flatMapObservable {
@@ -138,6 +152,11 @@ internal class RepositoryImpl(private val network: Network,
                 }
     }
 
+    /**
+     * Get the [Contact] information.
+     *
+     * @return [Single] of [Contact].
+     */
     override fun getContactInfo(): Single<Contact> {
         return Single.create {
             val phone = sharedPrefsProvider.getStringFromPreferences(Contact.PREF_KEY_PHONE, null)

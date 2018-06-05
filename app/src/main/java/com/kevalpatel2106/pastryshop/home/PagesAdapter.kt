@@ -20,7 +20,7 @@ import com.kevalpatel2106.pastryshop.bin.Pages
 internal class PagesAdapter(
         private val cards: ArrayList<Pages>,
         private val pageSelectionListener: PageSelectionListener)
-    : RecyclerView.Adapter<HomeCardsViewHolder>() {
+    : RecyclerView.Adapter<PagesListViewHolder>() {
 
     var isClickEnabled = true
 
@@ -30,13 +30,13 @@ internal class PagesAdapter(
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeCardsViewHolder {
-        return HomeCardsViewHolder.create(parent = parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PagesListViewHolder {
+        return PagesListViewHolder.create(parent = parent)
     }
 
     override fun getItemCount(): Int = cards.size
 
-    override fun onBindViewHolder(holder: HomeCardsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PagesListViewHolder, position: Int) {
         holder.bind(
                 page = cards[position],
                 imageHeight = imageHeight,

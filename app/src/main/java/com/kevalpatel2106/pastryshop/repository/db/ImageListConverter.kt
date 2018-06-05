@@ -14,11 +14,15 @@ import android.text.TextUtils
 
 /**
  * Created by Keval on 01/06/18.
+ * [TypeConverter] for room database.
  *
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
 class ImageListConverter {
 
+    /**
+     * Convert the comma separated string [value], into the [ArrayList] of string.
+     */
     @TypeConverter
     fun toImageList(value: String?): ArrayList<String> {
         return if (value == null) {
@@ -28,6 +32,9 @@ class ImageListConverter {
         }
     }
 
+    /**
+     * Convert the [arrayList] into the comma separated string.
+     */
     @TypeConverter
     fun fromImageList(arrayList: ArrayList<String>): String {
         return TextUtils.join(",", arrayList)

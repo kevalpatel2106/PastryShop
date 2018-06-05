@@ -12,7 +12,7 @@ import com.google.gson.annotations.SerializedName
 import com.kevalpatel2106.pastryshop.bin.Contact
 import com.kevalpatel2106.pastryshop.bin.Pages
 
-data class GetDataResponse(
+internal data class GetDataResponse(
 
         @field:SerializedName("pages")
         val pagesItem: ArrayList<PagesItem>,
@@ -24,7 +24,7 @@ data class GetDataResponse(
         val background: String
 )
 
-data class PagesItem(
+internal data class PagesItem(
 
         @field:SerializedName("id")
         val id: Long,
@@ -44,7 +44,7 @@ data class PagesItem(
     }
 }
 
-data class ContactItem(
+internal data class ContactItem(
 
         @field:SerializedName("phone")
         val phone: String,

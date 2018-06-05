@@ -31,7 +31,7 @@ import org.junit.runner.RunWith
  * @author [kevalpatel2106](https://github.com/kevalpatel2106)
  */
 @RunWith(AndroidJUnit4::class)
-class HomeCardsViewHolderTest {
+class PagesListViewHolderTest {
 
     private val testTitle = "test_title"
     private val testsDescription = "test_description"
@@ -51,7 +51,7 @@ class HomeCardsViewHolderTest {
     @Test
     @UiThreadTest
     fun checkCreateHolder() {
-        val holder = HomeCardsViewHolder.create(LinearLayout(context))
+        val holder = PagesListViewHolder.create(LinearLayout(context))
 
         assertNotNull(holder)
         assertNotNull(holder.itemView.findViewById<AppCompatTextView>(R.id.card_title_tv))
@@ -73,7 +73,7 @@ class HomeCardsViewHolderTest {
 
         val itemView = LayoutInflater.from(context).inflate(R.layout.item_dashboard_card, null)
 
-        val holder = HomeCardsViewHolder(itemView)
+        val holder = PagesListViewHolder(itemView)
 
         // Bind the adapter
         holder.bind(page, imageViewHeight, { clickCount++ })
@@ -102,7 +102,7 @@ class HomeCardsViewHolderTest {
     fun checkTraditionNames() {
         val itemView = LayoutInflater.from(context).inflate(R.layout.item_dashboard_card, null)
 
-        val holder = HomeCardsViewHolder(itemView)
+        val holder = PagesListViewHolder(itemView)
         val page = Pages(
                 id = 1,
                 title = testTitle,

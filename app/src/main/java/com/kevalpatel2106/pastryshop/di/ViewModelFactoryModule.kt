@@ -20,6 +20,7 @@ import dagger.multibindings.IntoMap
 
 /**
  * Created by Keval on 01/06/18.
+ * Dagger [Module] to inject view models using dagger.
  *
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */

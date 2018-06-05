@@ -20,21 +20,32 @@ import kotlinx.android.synthetic.main.item_dashboard_card.view.*
 
 /**
  * Created by Keval on 01/06/18.
+ * [RecyclerView.ViewHolder] for holding the view for the pages list.
  *
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
-class HomeCardsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class PagesListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     companion object {
 
-        fun create(parent: ViewGroup): HomeCardsViewHolder {
+        /**
+         * Create new instance of [PagesListViewHolder].
+         *
+         * @param parent Parent [ViewGroup].
+         */
+        fun create(parent: ViewGroup): PagesListViewHolder {
             val view = LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_dashboard_card, parent, false)
 
-            return HomeCardsViewHolder(view)
+            return PagesListViewHolder(view)
         }
     }
 
+    /**
+     * Bind the [page] with the [itemView]. [imageHeight] is the height of the image view that
+     * displays page cover image. Whenever user clicks on the [itemView], [onClick] will invoke to
+     * perform given actions.
+     */
     fun bind(page: Pages, imageHeight: Int, onClick: (page: Pages) -> Unit) {
         itemView.card_title_tv.text = page.title
         itemView.card_description_tv.text = page.description

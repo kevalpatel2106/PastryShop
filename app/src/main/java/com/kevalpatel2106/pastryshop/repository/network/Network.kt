@@ -20,7 +20,9 @@ import java.util.concurrent.TimeUnit
 
 /**
  * Created by Keval on 01/06/18.
+ * Class to provide the [Retrofit] client with the given [baseUrl].
  *
+ * @param enableLog If you want to turn on the request/response logging set this to true.
  * @author <a href="https://github.com/kevalpatel2106">kevalpatel2106</a>
  */
 class Network(private val baseUrl: String, enableLog: Boolean) {
